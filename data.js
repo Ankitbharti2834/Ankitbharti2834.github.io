@@ -267,14 +267,14 @@ const CONFIG = {
   // type options: Learning Path | Module | Badge | Trophy
   azureAchievements: [
     {
-      name: "End-to-End Analytics Using Microsoft Fabric",
+      name: "Introduction to End-to-End Analytics Using Microsoft Fabric",
       issuer: "Microsoft",
       type: "Learning Path",
       date: "2024",
       pdf: "docs/azure/Introduction to end-to-end analytics using Microsoft Fabric.pdf"
     },
     {
-      name: "Lakehouses in Microsoft Fabric",
+      name: "Get Started with Lakehouses in Microsoft Fabric",
       issuer: "Microsoft",
       type: "Module",
       date: "2024",
