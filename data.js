@@ -34,7 +34,7 @@ const CONFIG = {
   // To add a project: copy one block, paste at end, update fields
   projects: [
     {
-      num: "PROJECT · AWARE CUSTOM BIOMETRIC WEARABLES",
+      num: "PROJECT 01 · AWARE CUSTOM BIOMETRIC WEARABLES",
       title: "Enterprise Power BI KPI Dashboard Suite",
       desc: "Unified 4 siloed sources into a single Power BI reporting layer connected to Azure Synapse, Dynamics 365 CRM, and SharePoint — delivering cross-functional KPI visibility to C-suite.",
       impact: ["↑ 30% Faster Reporting", "↑ 25% Forecast Accuracy"],
@@ -43,7 +43,7 @@ const CONFIG = {
       github: "https://github.com/Ankitbharti2834/aware-cbw-powerbi-kpi-dashboard"
     },
     {
-      num: "PROJECT · AWARE CUSTOM BIOMETRIC WEARABLES",
+      num: "PROJECT 02 · AWARE CUSTOM BIOMETRIC WEARABLES",
       title: "End-to-End ETL Pipeline & Azure Data Warehouse",
       desc: "Medallion architecture (Bronze→Silver→Gold) on Azure Synapse ingesting IoT biometric feeds, Shopify API orders, and Dynamics 365 CRM data at enterprise scale via ADF.",
       impact: ["↑ 65% Faster Data Loads", "↓ 40% Processing Effort"],
@@ -52,7 +52,7 @@ const CONFIG = {
       github: "https://github.com/Ankitbharti2834/aware-cbw-etl-azure-pipeline"
     },
     {
-      num: "PROJECT · AWARE CUSTOM BIOMETRIC WEARABLES",
+      num: "PROJECT 03 · AWARE CUSTOM BIOMETRIC WEARABLES",
       title: "GPT-Powered Automation & AI Agent Workflows",
       desc: "GPT-4o document routing agents, real-time CRM anomaly detection, and automated BI report distribution eliminating 10+ manual cross-functional workflows.",
       impact: ["↓ 45% Manual Processing", "10+ Workflows Automated"],
@@ -61,7 +61,7 @@ const CONFIG = {
       github: "https://github.com/Ankitbharti2834/aware-cbw-gpt-ai-automation"
     },
     {
-      num: "PROJECT · AWARE CUSTOM BIOMETRIC WEARABLES",
+      num: "PROJECT 04 · AWARE CUSTOM BIOMETRIC WEARABLES",
       title: "Financial Forecasting Model & Profitability Analysis",
       desc: "CFO-facing financial forecasting with Python OLS models, VBA-automated variance analysis, and A/B pricing tests — identifying cost leakage across 3 product lines.",
       impact: ["↑ 25% Forecast Accuracy", "Cost Leakage Found: 3 Lines"],
@@ -70,7 +70,7 @@ const CONFIG = {
       github: "https://github.com/Ankitbharti2834/Financial-Forecasting-Model"
     },
     {
-      num: "PROJECT · AWARECBW.COM · AWAREINDUSTRIAL.COM · AWAREDEFENSE.US",
+      num: "PROJECT 05 · AWARECBW.COM · AWAREINDUSTRIAL.COM · AWAREDEFENSE.US",
       title: "E-Commerce Analytics & Sales Performance",
       desc: "Unified three Shopify storefronts (consumer, industrial, defense) with Google Analytics and BigQuery into a single Power BI reporting layer covering revenue, LTV, and fulfillment.",
       impact: ["↓ 50% Reconciliation Effort", "4 Sources → 1 Layer"],
@@ -79,7 +79,7 @@ const CONFIG = {
       github: "https://github.com/Ankitbharti2834/aware-cbw-ecommerce-analytics"
     },
     {
-      num: "PROJECT · AWARE CUSTOM BIOMETRIC WEARABLES",
+      num: "PROJECT 06 · AWARE CUSTOM BIOMETRIC WEARABLES",
       title: "Data Quality Framework & GDPR/HIPAA-aligned Compliance Dashboard",
       desc: "GDPR and HIPAA-aligned governance framework with automated DQ checks, SHA-256 PII masking, retention enforcement, and compliance Power BI dashboard for auditors.",
       impact: ["100% Audit-Ready", "↓ 35% Quality Incidents"],
@@ -88,7 +88,7 @@ const CONFIG = {
       github: "https://github.com/Ankitbharti2834/Data-Quality-Framework-GDPR-HIPAA-Compliance"
     },
     {
-      num: "PROJECT · UNIVERSITY OF NORTH ALABAMA",
+      num: "PROJECT 07 · UNIVERSITY OF NORTH ALABAMA",
       title: "Institutional Data Audit & Interdepartmental Database Integration",
       desc: "Resolved institutional data quality gaps and unified interdepartmental databases into a single, audit-ready reporting structure — reported to Managers across academic and administrative units.",
 	  impact: ["↑ 50% Data Accuracy", "3+ Departments Standardized"],

@@ -399,7 +399,7 @@ window.addEventListener('DOMContentLoaded', () => {
       <div class="pi">${p.impact.map(x=>`<span class="ib">${x}</span>`).join('')}</div>
       <div class="ptools">${p.tools.map(t=>`<span class="tt">${t}</span>`).join('')}</div>
       <div class="pconf"><span class="cdot"></span>${p.confidential}</div>
-      <a href="${p.github}" class="pl">View on GitHub →</a>
+      <a href="${p.github}" target = "_blank" rel="noopener noreferrer" class="pl">View on GitHub →</a>
     </div>`;
   });
 
