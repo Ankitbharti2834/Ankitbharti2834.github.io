@@ -922,9 +922,8 @@ window.addEventListener('DOMContentLoaded',()=>{
           <div class="exp-company"><strong>${e.company}</strong> · ${e.location}</div>
         </div>
         <div class="exp-meta">
-          <div class="exp-date">${e.date}</div>
-          <div class="exp-type">${e.type}</div>
-        </div>
+          <div class="exp-date">${e.date}</div>    
+      </div>
       </div>
       <ul class="exp-bullets">${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
       <div class="exp-tags">${e.tags.map(t=>`<span class="exp-tag">${t}</span>`).join('')}</div>
