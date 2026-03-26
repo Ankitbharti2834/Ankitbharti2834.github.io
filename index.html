@@ -739,8 +739,9 @@ document.querySelectorAll('.pc,.gc').forEach(card=>{card.addEventListener('mouse
 
 <!-- ── CHATBOT (NO VOICE) ── -->
 <style>
-#cb-btn{position:fixed;bottom:2rem;right:2rem;z-index:9999;width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,#1a1000,#0a0a1a);border:2px solid #F5A623;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 28px rgba(245,166,35,.4);transition:transform .2s,box-shadow .2s;padding:0}
-#cb-btn:hover{transform:scale(1.1);box-shadow:0 6px 36px rgba(245,166,35,.6)}
+#cb-btn{position:fixed;bottom:5rem;right:2rem;z-index:9999;width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,#1a1000,#0a0a1a);border:2px solid #F5A623;cursor:grab;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 28px rgba(245,166,35,.4);transition:box-shadow .2s;padding:0;user-select:none;touch-action:none}
+#cb-btn:active{cursor:grabbing}
+#cb-btn:hover{box-shadow:0 6px 36px rgba(245,166,35,.6)}
 #cb-btn .cb-pulse{position:absolute;width:100%;height:100%;border-radius:50%;background:rgba(245,166,35,.2);animation:cbp 2.2s infinite;pointer-events:none}
 @keyframes cbp{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.45);opacity:0}}
 #cb-badge{position:absolute;top:-3px;right:-3px;width:20px;height:20px;background:#F5A623;border-radius:50%;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;color:#060B18;display:flex;align-items:center;justify-content:center;border:2px solid #060B18;z-index:2}
@@ -787,7 +788,7 @@ document.querySelectorAll('.pc,.gc').forEach(card=>{card.addEventListener('mouse
 @media(max-width:480px){#cb-win{width:calc(100vw - 1.5rem);right:.75rem;bottom:5.5rem}}
 </style>
 
-<button id="cb-btn" onclick="cbToggle()" aria-label="Open AI Assistant">
+<button id="cb-btn" aria-label="Open AI Assistant">
   <div class="cb-pulse"></div>
   <div id="cb-badge">1</div>
   <svg class="rb-float" width="42" height="52" viewBox="0 0 42 52" fill="none">
@@ -996,7 +997,103 @@ document.getElementById('cb-inp').addEventListener('keydown',e=>{
   if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();cbSubmit(e);}
 });
 
-setTimeout(()=>{if(!cbOpen)cbToggle();},2000);
+// ── DRAG & DROP + CLICK ──────────────────────────────────────
+(function(){
+  const btn=document.getElementById('cb-btn');
+  const win=document.getElementById('cb-win');
+  let dragging=false,startX,startY,origX,origY,moved=false;
+  const SIZE=68;
+
+  function getBtnPos(){
+    const r=btn.getBoundingClientRect();
+    return{x:r.left,y:r.top};
+  }
+
+  function setPos(x,y){
+    const maxX=window.innerWidth-SIZE-4;
+    const maxY=window.innerHeight-SIZE-4;
+    const cx=Math.max(4,Math.min(x,maxX));
+    const cy=Math.max(4,Math.min(y,maxY));
+    btn.style.left=cx+'px';
+    btn.style.top=cy+'px';
+    btn.style.right='auto';
+    btn.style.bottom='auto';
+    positionWindow(cx,cy);
+  }
+
+  function positionWindow(bx,by){
+    if(!cbOpen)return;
+    const ww=380,wh=560;
+    let wx=bx+SIZE+8;
+    let wy=by+SIZE/2-wh/2;
+    if(wx+ww>window.innerWidth-8)wx=bx-ww-8;
+    if(wx<8)wx=8;
+    if(wy+wh>window.innerHeight-8)wy=window.innerHeight-wh-8;
+    if(wy<8)wy=8;
+    win.style.left=wx+'px';
+    win.style.top=wy+'px';
+    win.style.right='auto';
+    win.style.bottom='auto';
+  }
+
+  function onDown(e){
+    if(e.button&&e.button!==0)return;
+    dragging=true;moved=false;
+    const touch=e.touches?e.touches[0]:e;
+    startX=touch.clientX;startY=touch.clientY;
+    const pos=getBtnPos();origX=pos.x;origY=pos.y;
+    btn.style.transition='box-shadow .2s';
+    e.preventDefault();
+  }
+
+  function onMove(e){
+    if(!dragging)return;
+    const touch=e.touches?e.touches[0]:e;
+    const dx=touch.clientX-startX;
+    const dy=touch.clientY-startY;
+    if(Math.abs(dx)>4||Math.abs(dy)>4)moved=true;
+    if(moved){setPos(origX+dx,origY+dy);}
+    e.preventDefault();
+  }
+
+  function onUp(e){
+    if(!dragging)return;
+    dragging=false;
+    if(!moved)cbToggle();
+    btn.style.transition='box-shadow .2s';
+  }
+
+  btn.addEventListener('mousedown',onDown);
+  btn.addEventListener('touchstart',onDown,{passive:false});
+  document.addEventListener('mousemove',onMove);
+  document.addEventListener('touchmove',onMove,{passive:false});
+  document.addEventListener('mouseup',onUp);
+  document.addEventListener('touchend',onUp);
+  window.addEventListener('resize',()=>{
+    const r=btn.getBoundingClientRect();
+    setPos(r.left,r.top);
+    positionWindow(r.left,r.top);
+  });
+
+  // Override cbToggle to reposition window relative to button
+  const _orig=cbToggle;
+  window.cbToggleOrig=_orig;
+  window.cbToggle=function(){
+    cbOpen=!cbOpen;
+    document.getElementById('cb-win').classList.toggle('open',cbOpen);
+    document.getElementById('cb-badge').style.display=cbOpen?'none':'flex';
+    if(cbOpen){
+      const r=btn.getBoundingClientRect();
+      positionWindow(r.left,r.top);
+      setTimeout(()=>document.getElementById('cb-inp').focus(),300);
+    }
+  };
+  // Reassign close button
+  document.getElementById('cb-cls').onclick=()=>window.cbToggle();
+
+  // Auto-open after 2 seconds
+  setTimeout(()=>{if(!cbOpen)window.cbToggle();},2000);
+})();
 </script>
 </body>
 </html>
