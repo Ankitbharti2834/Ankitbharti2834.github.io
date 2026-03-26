@@ -1225,68 +1225,126 @@ document.querySelectorAll('.pc,.gc').forEach(card=>{
 
 
 
-<!-- ── CHATBOT ───────────────────────────────────────────────── -->
+
+<!-- ── CHATBOT ── -->
 <style>
-#cb-btn{position:fixed;bottom:2rem;right:2rem;z-index:9999;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#00E5D4,#8B5CF6);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,229,212,.35);transition:transform .2s,box-shadow .2s;font-size:1.4rem}
-#cb-btn:hover{transform:scale(1.1);box-shadow:0 6px 32px rgba(0,229,212,.5)}
-#cb-btn .cb-pulse{position:absolute;width:100%;height:100%;border-radius:50%;background:rgba(0,229,212,.25);animation:cbp 2.2s infinite;pointer-events:none}
-@keyframes cbp{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.35);opacity:0}}
-#cb-badge{position:absolute;top:-3px;right:-3px;width:18px;height:18px;background:#F5A623;border-radius:50%;font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;color:#060B18;display:flex;align-items:center;justify-content:center;border:2px solid #060B18}
-#cb-win{position:fixed;bottom:6rem;right:2rem;z-index:9999;width:370px;height:540px;background:#0C1428;border:1px solid rgba(0,229,212,.2);border-radius:16px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.6);transform:scale(.95) translateY(10px);opacity:0;pointer-events:none;transition:all .25s cubic-bezier(.4,0,.2,1)}
+#cb-btn{position:fixed;bottom:2rem;right:2rem;z-index:9999;width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,#1a1000,#0a0a1a);border:2px solid #F5A623;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 28px rgba(245,166,35,.4);transition:transform .2s,box-shadow .2s;padding:0}
+#cb-btn:hover{transform:scale(1.1);box-shadow:0 6px 36px rgba(245,166,35,.6)}
+#cb-btn .cb-pulse{position:absolute;width:100%;height:100%;border-radius:50%;background:rgba(245,166,35,.2);animation:cbp 2.2s infinite;pointer-events:none}
+@keyframes cbp{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.45);opacity:0}}
+#cb-badge{position:absolute;top:-3px;right:-3px;width:20px;height:20px;background:#F5A623;border-radius:50%;font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;color:#060B18;display:flex;align-items:center;justify-content:center;border:2px solid #060B18;z-index:2}
+#cb-win{position:fixed;bottom:6.5rem;right:2rem;z-index:9999;width:380px;height:580px;background:#0C1428;border:1px solid rgba(245,166,35,.3);border-radius:18px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.7);transform:scale(.92) translateY(16px);opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.4,0,.2,1)}
 #cb-win.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
-#cb-head{padding:1rem 1.1rem;background:linear-gradient(135deg,rgba(0,229,212,.1),rgba(139,92,246,.08));border-bottom:1px solid rgba(0,229,212,.12);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.cb-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#00E5D4,#8B5CF6);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;color:#060B18;flex-shrink:0}
-.cb-inf{margin-left:.7rem;flex:1}
-.cb-nm{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;color:#EEF2FF;line-height:1}
-.cb-st{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#00E5D4;margin-top:.2rem;display:flex;align-items:center;gap:.35rem}
-.cb-dot{width:6px;height:6px;background:#22C55E;border-radius:50%;animation:cbp2 2s infinite}
-@keyframes cbp2{0%,100%{opacity:1}50%{opacity:.4}}
-#cb-cls{background:transparent;border:none;color:rgba(148,163,196,.6);cursor:pointer;font-size:1.1rem;padding:.25rem;line-height:1;transition:color .2s}
-#cb-cls:hover{color:#EEF2FF}
-#cb-msgs{flex:1;overflow-y:auto;padding:.85rem;display:flex;flex-direction:column;gap:.65rem;scroll-behavior:smooth}
+#cb-head{padding:.85rem 1rem;background:linear-gradient(135deg,rgba(245,166,35,.12),rgba(139,92,246,.08));border-bottom:1px solid rgba(245,166,35,.15);display:flex;align-items:center;gap:.7rem;flex-shrink:0}
+#cb-robot-icon{width:40px;height:40px;min-width:40px;border-radius:50%;background:linear-gradient(135deg,#1a1000,#0a0a1a);border:1.5px solid #F5A623;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.cb-inf{flex:1}
+.cb-nm{font-family:'Syne',sans-serif;font-size:.84rem;font-weight:700;color:#EEF2FF;line-height:1}
+.cb-st{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:#F5A623;margin-top:.18rem;display:flex;align-items:center;gap:.3rem}
+.cb-dot{width:5px;height:5px;background:#22C55E;border-radius:50%;animation:cbp2 2s infinite}
+@keyframes cbp2{0%,100%{opacity:1}50%{opacity:.3}}
+#cb-head-btns{display:flex;gap:.5rem;align-items:center}
+.cb-hbtn{background:transparent;border:1px solid rgba(245,166,35,.25);color:rgba(245,166,35,.7);cursor:pointer;font-size:.72rem;padding:.28rem .55rem;border-radius:6px;transition:all .2s;font-family:'JetBrains Mono',monospace}
+.cb-hbtn:hover{background:rgba(245,166,35,.12);color:#F5A623;border-color:rgba(245,166,35,.5)}
+.cb-hbtn.muted{background:rgba(245,166,35,.15);color:#F5A623;border-color:#F5A623}
+#cb-cls{background:transparent;border:none;color:rgba(148,163,196,.5);cursor:pointer;font-size:1rem;padding:.25rem .4rem;line-height:1;transition:color .2s;border-radius:4px}
+#cb-cls:hover{color:#EEF2FF;background:rgba(255,255,255,.06)}
+#cb-msgs{flex:1;overflow-y:auto;padding:.8rem;display:flex;flex-direction:column;gap:.6rem;scroll-behavior:smooth}
 #cb-msgs::-webkit-scrollbar{width:3px}
-#cb-msgs::-webkit-scrollbar-thumb{background:rgba(0,229,212,.2);border-radius:2px}
-.cbm{max-width:90%;animation:cbf .22s ease}
-@keyframes cbf{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+#cb-msgs::-webkit-scrollbar-thumb{background:rgba(245,166,35,.2);border-radius:2px}
+.cbm{max-width:88%;animation:cbf .2s ease}
+@keyframes cbf{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 .cbm.bot{align-self:flex-start}.cbm.usr{align-self:flex-end}
-.cbb{padding:.6rem .85rem;border-radius:12px;font-family:'Outfit',sans-serif;font-size:.8rem;line-height:1.65;word-break:break-word}
-.cbm.bot .cbb{background:rgba(0,229,212,.07);border:1px solid rgba(0,229,212,.15);color:#EEF2FF;border-radius:4px 12px 12px 12px}
-.cbm.usr .cbb{background:linear-gradient(135deg,rgba(0,229,212,.18),rgba(139,92,246,.14));border:1px solid rgba(0,229,212,.25);color:#EEF2FF;border-radius:12px 4px 12px 12px}
-.cbb strong{color:#00E5D4;font-weight:600}
-.cbb a{color:#00E5D4;text-decoration:none;border-bottom:1px solid rgba(0,229,212,.35)}
-.cb-typ{display:flex;align-items:center;gap:.3rem;padding:.5rem .85rem}
-.cb-typ span{width:6px;height:6px;background:#00E5D4;border-radius:50%;animation:cbt 1.2s infinite}
+.cbb{padding:.6rem .8rem;border-radius:12px;font-family:'Outfit',sans-serif;font-size:.8rem;line-height:1.65;word-break:break-word;position:relative}
+.cbm.bot .cbb{background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.18);color:#EEF2FF;border-radius:4px 12px 12px 12px}
+.cbm.usr .cbb{background:linear-gradient(135deg,rgba(245,166,35,.15),rgba(139,92,246,.12));border:1px solid rgba(245,166,35,.22);color:#EEF2FF;border-radius:12px 4px 12px 12px}
+.cbb strong{color:#F5A623;font-weight:600}
+.cbb a{color:#F5A623;text-decoration:none;border-bottom:1px solid rgba(245,166,35,.3)}
+.cb-speak-btn{display:inline-flex;align-items:center;gap:.25rem;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);color:rgba(245,166,35,.6);font-size:.6rem;padding:.15rem .45rem;border-radius:4px;cursor:pointer;font-family:'JetBrains Mono',monospace;margin-top:.4rem;transition:all .2s}
+.cb-speak-btn:hover{background:rgba(245,166,35,.16);color:#F5A623}
+.cb-typ{display:flex;align-items:center;gap:.3rem;padding:.5rem .8rem}
+.cb-typ span{width:6px;height:6px;background:#F5A623;border-radius:50%;animation:cbt 1.2s infinite}
 .cb-typ span:nth-child(2){animation-delay:.2s}.cb-typ span:nth-child(3){animation-delay:.4s}
-@keyframes cbt{0%,80%,100%{transform:scale(.8);opacity:.4}40%{transform:scale(1.1);opacity:1}}
-#cb-chips{padding:.5rem .85rem;display:flex;flex-wrap:wrap;gap:.4rem;border-top:1px solid rgba(255,255,255,.05);flex-shrink:0}
-.cb-chip{background:rgba(0,229,212,.06);border:1px solid rgba(0,229,212,.18);color:#EEF2FF;font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.22rem .65rem;border-radius:100px;cursor:pointer;transition:all .18s;white-space:nowrap}
-.cb-chip:hover{background:rgba(0,229,212,.14);color:#00E5D4;border-color:rgba(0,229,212,.4)}
-#cb-form{padding:.7rem .85rem;border-top:1px solid rgba(255,255,255,.05);display:flex;gap:.5rem;flex-shrink:0}
-#cb-inp{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.5rem .75rem;color:#EEF2FF;font-family:'Outfit',sans-serif;font-size:.8rem;outline:none;transition:border-color .2s}
-#cb-inp:focus{border-color:rgba(0,229,212,.4)}
-#cb-inp::placeholder{color:rgba(148,163,196,.5)}
-#cb-snd{background:linear-gradient(135deg,#00E5D4,#8B5CF6);border:none;border-radius:8px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#060B18;font-size:.85rem;transition:opacity .2s;flex-shrink:0}
+@keyframes cbt{0%,80%,100%{transform:scale(.7);opacity:.3}40%{transform:scale(1.1);opacity:1}}
+#cb-chips{padding:.45rem .8rem;display:flex;flex-wrap:wrap;gap:.35rem;border-top:1px solid rgba(255,255,255,.05);flex-shrink:0}
+.cb-chip{background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);color:#EEF2FF;font-family:'JetBrains Mono',monospace;font-size:.59rem;padding:.2rem .6rem;border-radius:100px;cursor:pointer;transition:all .18s;white-space:nowrap}
+.cb-chip:hover{background:rgba(245,166,35,.15);color:#F5A623;border-color:rgba(245,166,35,.45)}
+#cb-form{padding:.65rem .8rem;border-top:1px solid rgba(255,255,255,.05);display:flex;gap:.45rem;align-items:center;flex-shrink:0}
+#cb-inp{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.48rem .7rem;color:#EEF2FF;font-family:'Outfit',sans-serif;font-size:.8rem;outline:none;transition:border-color .2s}
+#cb-inp:focus{border-color:rgba(245,166,35,.4)}
+#cb-inp::placeholder{color:rgba(148,163,196,.45)}
+#cb-mic{background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.25);border-radius:8px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#F5A623;font-size:.85rem;transition:all .2s;flex-shrink:0}
+#cb-mic:hover{background:rgba(245,166,35,.18)}
+#cb-mic.recording{background:rgba(239,68,68,.2);border-color:#EF4444;color:#EF4444;animation:recpulse 1s infinite}
+@keyframes recpulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
+#cb-snd{background:linear-gradient(135deg,#F5A623,#8B5CF6);border:none;border-radius:8px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#060B18;font-size:.85rem;transition:opacity .2s;flex-shrink:0}
 #cb-snd:hover{opacity:.85}
-#cb-snd:disabled{opacity:.4;cursor:not-allowed}
-@media(max-width:480px){#cb-win{width:calc(100vw - 2rem);right:1rem;bottom:5rem}}
+#cb-snd:disabled{opacity:.35;cursor:not-allowed}
+.robot-float{animation:rfloat 3s ease-in-out infinite}
+@keyframes rfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.eye-blink{animation:eblink 4s infinite}
+@keyframes eblink{0%,88%,96%,100%{transform:scaleY(1)}92%{transform:scaleY(0.1)}}
+@media(max-width:480px){#cb-win{width:calc(100vw - 1.5rem);right:.75rem;bottom:5.5rem}}
 </style>
 
-<button id="cb-btn" onclick="cbToggle()" aria-label="Chat with Ankit's AI assistant">
-  <div class="cb-pulse"></div><span>💬</span>
+<!-- Robot Button -->
+<button id="cb-btn" onclick="cbToggle()" aria-label="Open AI Assistant">
+  <div class="cb-pulse"></div>
   <div id="cb-badge">1</div>
+  <svg class="robot-float" width="42" height="52" viewBox="0 0 42 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="2" width="22" height="16" rx="5" fill="#1a1000" stroke="#F5A623" stroke-width="1.5"/>
+    <g class="eye-blink"><rect x="14" y="6" width="5" height="4" rx="2" fill="#F5A623"/></g>
+    <g class="eye-blink"><rect x="23" y="6" width="5" height="4" rx="2" fill="#F5A623"/></g>
+    <rect x="15" y="13" width="12" height="2" rx="1" fill="#F5A623" opacity=".4"/>
+    <circle cx="21" cy="0" r="2" fill="#F5A623"/>
+    <rect x="4" y="19" width="34" height="20" rx="4" fill="#1a1000" stroke="#F5A623" stroke-width="1.5"/>
+    <rect x="8" y="23" width="10" height="8" rx="2" fill="#F5A623" opacity=".12" stroke="#F5A623" stroke-width="1"/>
+    <line x1="10" y1="25" x2="16" y2="25" stroke="#F5A623" stroke-width=".8" opacity=".6"/>
+    <line x1="10" y1="27" x2="16" y2="27" stroke="#F5A623" stroke-width=".8" opacity=".4"/>
+    <line x1="10" y1="29" x2="14" y2="29" stroke="#F5A623" stroke-width=".8" opacity=".3"/>
+    <circle cx="30" cy="27" r="4" stroke="#F5A623" stroke-width="1" fill="none"/>
+    <circle cx="30" cy="27" r="1.5" fill="#F5A623"/>
+    <rect x="10" y="34" width="22" height="1.5" rx=".75" fill="#F5A623" opacity=".2"/>
+    <rect x="0" y="21" width="4" height="13" rx="2" fill="#1a1000" stroke="#F5A623" stroke-width="1.2"/>
+    <rect x="38" y="21" width="4" height="13" rx="2" fill="#1a1000" stroke="#F5A623" stroke-width="1.2"/>
+    <rect x="9" y="40" width="10" height="12" rx="2.5" fill="#1a1000" stroke="#F5A623" stroke-width="1.2"/>
+    <rect x="23" y="40" width="10" height="12" rx="2.5" fill="#1a1000" stroke="#F5A623" stroke-width="1.2"/>
+    <rect x="9" y="50" width="10" height="2" rx="1" fill="#F5A623" opacity=".5"/>
+    <rect x="23" y="50" width="10" height="2" rx="1" fill="#F5A623" opacity=".5"/>
+  </svg>
 </button>
 
-<div id="cb-win" role="dialog">
+<!-- Chat Window -->
+<div id="cb-win" role="dialog" aria-label="Ankit's AI Assistant">
   <div id="cb-head">
-    <div class="cb-av">AB</div>
-    <div class="cb-inf">
-      <div class="cb-nm">Ankit's Portfolio Assistant</div>
-      <div class="cb-st"><span class="cb-dot"></span>Powered by Claude AI</div>
+    <div id="cb-robot-icon">
+      <svg width="28" height="34" viewBox="0 0 42 52" fill="none">
+        <rect x="10" y="2" width="22" height="16" rx="5" fill="#1a1000" stroke="#F5A623" stroke-width="1.8"/>
+        <rect x="14" y="6" width="5" height="4" rx="2" fill="#F5A623"/>
+        <rect x="23" y="6" width="5" height="4" rx="2" fill="#F5A623"/>
+        <rect x="15" y="13" width="12" height="2" rx="1" fill="#F5A623" opacity=".5"/>
+        <circle cx="21" cy="0" r="2" fill="#F5A623"/>
+        <rect x="4" y="19" width="34" height="20" rx="4" fill="#1a1000" stroke="#F5A623" stroke-width="1.8"/>
+        <circle cx="30" cy="27" r="4" stroke="#F5A623" stroke-width="1.2" fill="none"/>
+        <circle cx="30" cy="27" r="1.5" fill="#F5A623"/>
+        <rect x="0" y="21" width="4" height="13" rx="2" fill="#1a1000" stroke="#F5A623" stroke-width="1.2"/>
+        <rect x="38" y="21" width="4" height="13" rx="2" fill="#1a1000" stroke="#F5A623" stroke-width="1.2"/>
+        <rect x="9" y="40" width="10" height="12" rx="2.5" fill="#1a1000" stroke="#F5A623" stroke-width="1.2"/>
+        <rect x="23" y="40" width="10" height="12" rx="2.5" fill="#1a1000" stroke="#F5A623" stroke-width="1.2"/>
+      </svg>
     </div>
-    <button id="cb-cls" onclick="cbToggle()">✕</button>
+    <div class="cb-inf">
+      <div class="cb-nm">Ankit's AI Assistant</div>
+      <div class="cb-st"><span class="cb-dot"></span>Voice + Text · Powered by Ankit</div>
+    </div>
+    <div id="cb-head-btns">
+      <button class="cb-hbtn" id="cb-mute-btn" onclick="cbToggleMute()" title="Toggle voice">🔊</button>
+      <button id="cb-cls" onclick="cbToggle()">✕</button>
+    </div>
   </div>
   <div id="cb-msgs">
-    <div class="cbm bot"><div class="cbb">Hi! I am Ankit's portfolio assistant. Ask me anything about his experience, skills, projects, availability, or how to contact him.</div></div>
+    <div class="cbm bot">
+      <div class="cbb">Hello and welcome! I'm the AI Assistant powering Ankit's Portfolio. Ankit is specialized in Data Analyst, Business Intelligence Engineering, and Game Developer based in Atlanta. Ask me about his skills, projects, availability — anything.</div>
+    </div>
   </div>
   <div id="cb-chips">
     <span class="cb-chip" onclick="cbAsk('What are Ankit\'s top skills?')">Top skills</span>
@@ -1298,7 +1356,8 @@ document.querySelectorAll('.pc,.gc').forEach(card=>{
     <span class="cb-chip" onclick="cbAsk('List all his certifications')">Certifications</span>
   </div>
   <form id="cb-form" onsubmit="cbSubmit(event)">
-    <input id="cb-inp" type="text" placeholder="Ask about experience, skills, projects..." autocomplete="off" maxlength="300"/>
+    <input id="cb-inp" type="text" placeholder="Type or speak your question..." autocomplete="off" maxlength="300"/>
+    <button type="button" id="cb-mic" onclick="cbToggleMic()" title="Speak your question">🎤</button>
     <button id="cb-snd" type="submit">➤</button>
   </form>
 </div>
@@ -1345,7 +1404,7 @@ MBA in Information Systems — University of North Alabama, GPA 3.67, May 2023
 Bachelor's in Commerce (Hons.) — University of Lucknow, India, Jul 2019
 
 SKILLS:
-Power BI, DAX, Power Query, Semantic Models, RLS, Azure Synapse, Azure Data Factory, Azure Data Lake, ADLS Gen2, MS Fabric, SQL (SQL Server, PostgreSQL), Python (Pandas, NumPy), ETL, SSIS, Power Automate, Microsoft Copilot, GPT Automation, Logic Apps, Dynamics 365, Shopify API, Dataverse, BigQuery, Tableau, Advanced Excel, VBA, Agile, Data Governance, GDPR, HIPAA
+Power BI, DAX, Power Query, Semantic Models, RLS, Azure Synapse, Azure Data Factory, Azure Data Lake, ADLS Gen2, MS Fabric, SQL, Python (Pandas, NumPy), ETL, SSIS, Power Automate, Microsoft Copilot, GPT Automation, Logic Apps, Dynamics 365, Shopify API, Dataverse, BigQuery, Tableau, Advanced Excel, VBA, Agile, Data Governance, GDPR, HIPAA
 
 CERTIFICATIONS (23+):
 IBM Data Analyst, PL-300 Power BI (in progress), Apache Spark SQL, Prompt Engineering for Generative AI, AI in Business Strategy, AI for Everyone, Agile Analytics, Advanced SQL, Financial Modeling, and more.
@@ -1373,13 +1432,80 @@ For contact requests or "Contact details are": reply with Email, Phone, and Link
 Never use: leveraging, passionate about, driving outcomes, results-oriented, or any AI-sounding phrases.
 Be direct and friendly like a knowledgeable colleague speaking on Ankit's behalf.`;
 
-let cbOpen=false,cbHist=[],cbBusy=false;
+let cbOpen=false,cbHist=[],cbBusy=false,cbMuted=false;
+let cbSpeaking=false,cbCurrentUtterance=null,cbRecognition=null,cbMicActive=false;
+let cbWelcomeDone=false;
+
+function cbGetMaleVoice(){
+  const voices=window.speechSynthesis.getVoices();
+  const preferred=['Google UK English Male','Microsoft David - English (United States)','Microsoft Mark - English (United States)','Alex','Daniel','Fred'];
+  for(const name of preferred){const v=voices.find(x=>x.name===name);if(v)return v;}
+  const male=voices.find(v=>v.name.toLowerCase().includes('male')||v.name.includes('David')||v.name.includes('Mark')||v.name.includes('Daniel')||v.name.includes('James')||v.name.includes('George'));
+  if(male)return male;
+  return voices.find(v=>v.lang==='en-US')||voices[0]||null;
+}
+
+function cbGetSentences(text){
+  const clean=text.replace(/<[^>]+>/g,'').replace(/\*\*/g,'');
+  return clean.match(/[^.!?]+[.!?]+/g)||[clean];
+}
+
+function cbSpeakSentences(sentences,index,onDone){
+  if(cbMuted||index>=sentences.length){if(onDone)onDone();return;}
+  const s=sentences[index].trim();
+  if(!s){cbSpeakSentences(sentences,index+1,onDone);return;}
+  const utt=new SpeechSynthesisUtterance(s);
+  const isExclaim=s.endsWith('!');
+  const isQuestion=s.endsWith('?');
+  const isShort=s.split(' ').length<=5;
+  utt.rate=isExclaim?1.12:isShort?1.08:1.0;
+  utt.pitch=isExclaim?1.05:isQuestion?1.0:0.88;
+  utt.volume=isExclaim?1:isShort?0.95:0.92;
+  const setVoice=()=>{const v=cbGetMaleVoice();if(v)utt.voice=v;};
+  if(window.speechSynthesis.getVoices().length>0)setVoice();
+  else window.speechSynthesis.onvoiceschanged=()=>{setVoice();window.speechSynthesis.onvoiceschanged=null;};
+  utt.onend=()=>{
+    cbSpeaking=false;cbCurrentUtterance=null;
+    setTimeout(()=>cbSpeakSentences(sentences,index+1,onDone),isExclaim?120:80);
+  };
+  utt.onerror=()=>{cbSpeaking=false;cbCurrentUtterance=null;cbSpeakSentences(sentences,index+1,onDone);};
+  cbCurrentUtterance=utt;cbSpeaking=true;
+  window.speechSynthesis.speak(utt);
+}
+
+function cbSpeak(text,onDone){
+  if(cbMuted){if(onDone)onDone();return;}
+  window.speechSynthesis.cancel();
+  const sentences=cbGetSentences(text);
+  cbSpeakSentences(sentences,0,onDone);
+}
+
+function cbStopSpeech(){
+  window.speechSynthesis.cancel();
+  cbSpeaking=false;cbCurrentUtterance=null;
+}
+
+function cbToggleMute(){
+  cbMuted=!cbMuted;
+  const btn=document.getElementById('cb-mute-btn');
+  btn.textContent=cbMuted?'🔇':'🔊';
+  btn.classList.toggle('muted',cbMuted);
+  if(cbMuted)cbStopSpeech();
+}
 
 function cbToggle(){
   cbOpen=!cbOpen;
   document.getElementById('cb-win').classList.toggle('open',cbOpen);
   document.getElementById('cb-badge').style.display=cbOpen?'none':'flex';
-  if(cbOpen)setTimeout(()=>document.getElementById('cb-inp').focus(),300);
+  if(cbOpen){
+    setTimeout(()=>document.getElementById('cb-inp').focus(),300);
+    if(!cbWelcomeDone){
+      cbWelcomeDone=true;
+      setTimeout(()=>cbSpeak("Hello and welcome! I'm the AI Assistant powering Ankit's Portfolio. Ankit is a Data Analyst, BI Engineer, and Game Developer based in Atlanta. Ask me about his skills, his projects, his availability — anything. I'm ready."),400);
+    }
+  } else {
+    cbStopSpeech();
+  }
 }
 
 function cbAsk(q){document.getElementById('cb-inp').value=q;cbSubmit(new Event('submit'));}
@@ -1392,6 +1518,7 @@ function cbSubmit(e){
   inp.value='';
   cbAdd(q,'usr');
   cbHist.push({role:'user',content:q});
+  cbStopSpeech();
   cbFetch();
 }
 
@@ -1405,6 +1532,7 @@ function cbAdd(text,role){
   d.appendChild(b);
   w.appendChild(d);
   w.scrollTop=w.scrollHeight;
+  return b;
 }
 
 function cbShowTyping(){
@@ -1416,6 +1544,30 @@ function cbShowTyping(){
 }
 
 function cbHideTyping(){const t=document.getElementById('cb-typ-ind');if(t)t.remove();}
+
+function cbStreamText(bubble,fullText){
+  return new Promise(resolve=>{
+    if(cbMuted){
+      const fmt=fullText.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+      bubble.innerHTML=fmt;
+      const w=document.getElementById('cb-msgs');w.scrollTop=w.scrollHeight;
+      resolve();return;
+    }
+    const words=fullText.split(' ');
+    let i=0;
+    const interval=setInterval(()=>{
+      if(i<words.length){
+        const partial=words.slice(0,i+1).join(' ');
+        const fmt=partial.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+        bubble.innerHTML=fmt;
+        const w=document.getElementById('cb-msgs');w.scrollTop=w.scrollHeight;
+        i++;
+      } else {
+        clearInterval(interval);resolve();
+      }
+    },cbMuted?0:55);
+  });
+}
 
 async function cbFetch(){
   cbBusy=true;
@@ -1432,22 +1584,66 @@ async function cbFetch(){
     if(d.content&&d.content[0]&&d.content[0].text){
       const txt=d.content[0].text;
       cbHist.push({role:'assistant',content:txt});
-      const fmt=txt.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
-      cbAdd(fmt,'bot');
+      const bubble=cbAdd('','bot');
+      cbSpeak(txt);
+      await cbStreamText(bubble,txt);
     } else {
       cbAdd("Sorry, I could not get a response. Contact Ankit at <a href='mailto:abharti1040@gmail.com'>abharti1040@gmail.com</a>",'bot');
     }
   } catch(err){
     cbHideTyping();
-    cbAdd("Connection issue. Please try again or contact Ankit at <a href='mailto:abharti1040@gmail.com'>abharti1040@gmail.com</a> or call <a href='tel:9176092096'>(917) 609-2096</a>",'bot');
+    cbAdd("Connection issue. Reach Ankit at <a href='mailto:abharti1040@gmail.com'>abharti1040@gmail.com</a> or call <a href='tel:9176092096'>(917) 609-2096</a>",'bot');
   }
   cbBusy=false;
   document.getElementById('cb-snd').disabled=false;
 }
 
+function cbToggleMic(){
+  if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){
+    alert('Voice input is not supported in this browser. Please use Chrome or Edge.');return;
+  }
+  if(cbMicActive){
+    if(cbRecognition)cbRecognition.stop();
+    return;
+  }
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  cbRecognition=new SR();
+  cbRecognition.lang='en-US';
+  cbRecognition.continuous=false;
+  cbRecognition.interimResults=true;
+  const mic=document.getElementById('cb-mic');
+  const inp=document.getElementById('cb-inp');
+  cbMicActive=true;
+  mic.classList.add('recording');
+  mic.title='Recording... click to stop';
+  cbRecognition.onresult=e=>{
+    let interim='',final='';
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      if(e.results[i].isFinal)final+=e.results[i][0].transcript;
+      else interim+=e.results[i][0].transcript;
+    }
+    inp.value=final||interim;
+  };
+  cbRecognition.onend=()=>{
+    cbMicActive=false;
+    mic.classList.remove('recording');
+    mic.title='Speak your question';
+    if(inp.value.trim()){cbSubmit(new Event('submit'));}
+  };
+  cbRecognition.onerror=()=>{
+    cbMicActive=false;
+    mic.classList.remove('recording');
+  };
+  cbRecognition.start();
+}
+
 document.getElementById('cb-inp').addEventListener('keydown',e=>{
   if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();cbSubmit(e);}
 });
+
+setTimeout(()=>{
+  if(!cbOpen)cbToggle();
+},2000);
 </script>
 </body>
 </html>
