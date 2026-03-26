@@ -1,19 +1,15 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/chat.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/chat",
-      "dest": "/api/chat.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ]
+  "version": 2
 }
+```
+4. Commit changes
+
+**Step 2 — Confirm your folder structure in GitHub looks like this**
+```
+Ankitbharti2834.github.io/
+├── api/
+│   └── chat.js
+├── docs/
+├── index.html
+├── vercel.json
+└── README.md
