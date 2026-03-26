@@ -1334,7 +1334,7 @@ document.querySelectorAll('.pc,.gc').forEach(card=>{
     </div>
     <div class="cb-inf">
       <div class="cb-nm">Ankit's AI Assistant</div>
-      <div class="cb-st"><span class="cb-dot"></span>Voice + Text · Powered by Ankit</div>
+      <div class="cb-st"><span class="cb-dot"></span>Voice + Text · Powered by Claude AI</div>
     </div>
     <div id="cb-head-btns">
       <button class="cb-hbtn" id="cb-mute-btn" onclick="cbToggleMute()" title="Toggle voice">🔊</button>
@@ -1343,7 +1343,7 @@ document.querySelectorAll('.pc,.gc').forEach(card=>{
   </div>
   <div id="cb-msgs">
     <div class="cbm bot">
-      <div class="cbb">Hello and welcome! I'm the AI Assistant powering Ankit's Portfolio. Ankit is specialized in Data Analyst, Business Intelligence Engineering, and Game Developer based in Atlanta. Ask me about his skills, projects, availability — anything.</div>
+      <div class="cbb">Hello and welcome! I'm the AI Assistant powering Ankit's Portfolio. Ankit is a Data Analyst, BI Engineer, and Game Developer based in Atlanta. Ask me about his skills, projects, availability — anything. I'm ready.</div>
     </div>
   </div>
   <div id="cb-chips">
@@ -1598,14 +1598,37 @@ async function cbFetch(){
   document.getElementById('cb-snd').disabled=false;
 }
 
+function cbShowMicStatus(msg,isError){
+  const inp=document.getElementById('cb-inp');
+  inp.placeholder=msg;
+  inp.style.borderColor=isError?'rgba(239,68,68,.5)':'rgba(245,166,35,.4)';
+  setTimeout(()=>{inp.placeholder='Type or speak your question...';inp.style.borderColor='';},3000);
+}
+
 function cbToggleMic(){
   if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){
-    alert('Voice input is not supported in this browser. Please use Chrome or Edge.');return;
+    cbShowMicStatus('Voice not supported — use Chrome or Edge',true);
+    return;
   }
   if(cbMicActive){
     if(cbRecognition)cbRecognition.stop();
     return;
   }
+  navigator.mediaDevices.getUserMedia({audio:true})
+    .then(stream=>{
+      stream.getTracks().forEach(t=>t.stop());
+      cbStartRecognition();
+    })
+    .catch(err=>{
+      if(err.name==='NotAllowedError'||err.name==='PermissionDeniedError'){
+        cbShowMicStatus('Mic blocked — click the lock icon in address bar',true);
+      } else {
+        cbShowMicStatus('Mic not found — check your microphone',true);
+      }
+    });
+}
+
+function cbStartRecognition(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   cbRecognition=new SR();
   cbRecognition.lang='en-US';
@@ -1615,7 +1638,9 @@ function cbToggleMic(){
   const inp=document.getElementById('cb-inp');
   cbMicActive=true;
   mic.classList.add('recording');
-  mic.title='Recording... click to stop';
+  mic.title='Listening... click to stop';
+  inp.placeholder='Listening...';
+  inp.style.borderColor='rgba(245,166,35,.5)';
   cbRecognition.onresult=e=>{
     let interim='',final='';
     for(let i=e.resultIndex;i<e.results.length;i++){
@@ -1623,16 +1648,27 @@ function cbToggleMic(){
       else interim+=e.results[i][0].transcript;
     }
     inp.value=final||interim;
+    if(final)inp.placeholder='Got it — sending...';
   };
   cbRecognition.onend=()=>{
     cbMicActive=false;
     mic.classList.remove('recording');
     mic.title='Speak your question';
+    inp.placeholder='Type or speak your question...';
+    inp.style.borderColor='';
     if(inp.value.trim()){cbSubmit(new Event('submit'));}
   };
-  cbRecognition.onerror=()=>{
+  cbRecognition.onerror=e=>{
     cbMicActive=false;
     mic.classList.remove('recording');
+    inp.style.borderColor='';
+    if(e.error==='not-allowed'||e.error==='permission-denied'){
+      cbShowMicStatus('Mic blocked — allow mic in browser settings',true);
+    } else if(e.error==='no-speech'){
+      cbShowMicStatus('No speech detected — try again',false);
+    } else {
+      cbShowMicStatus('Mic error: '+e.error,true);
+    }
   };
   cbRecognition.start();
 }
