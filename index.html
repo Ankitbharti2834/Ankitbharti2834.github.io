@@ -3,33 +3,1451 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Ankit Bharti — Redirecting...</title>
-<meta http-equiv="refresh" content="0; url=https://ankitbharti-portfolio.vercel.app">
-<script>window.location.replace("https://ankitbharti-portfolio.vercel.app");</script>
+<title>Ankit Bharti — Data Analyst & Game Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:#060B18;color:#EEF2FF;font-family:'Outfit',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:1.2rem}
-.logo{font-family:Georgia,serif;font-size:2.8rem;font-weight:800;color:#00E5D4;letter-spacing:-.02em}
-.msg{font-size:.9rem;color:#94A3C4;display:flex;align-items:center;gap:.5rem}
-.dots{display:flex;gap:.3rem}
-.dot{width:7px;height:7px;border-radius:50%;background:#00E5D4;animation:bounce 1.2s infinite}
-.dot:nth-child(2){animation-delay:.2s}
-.dot:nth-child(3){animation-delay:.4s}
-@keyframes bounce{0%,80%,100%{transform:scale(.6);opacity:.3}40%{transform:scale(1);opacity:1}}
-a{color:#00E5D4;font-size:.8rem;opacity:.6;text-decoration:none;margin-top:.5rem}
-a:hover{opacity:1}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#060B18;--bg2:#0C1428;--bg3:#08101F;
+  --cyan:#00E5D4;--cyan2:#00B4A6;
+  --gold:#F5A623;--purple:#8B5CF6;--green:#22C55E;--red:#F87171;
+  --text:#EEF2FF;--sub:#C8D4F0;--muted:#94A3C4;
+  --border:rgba(0,229,212,0.12);--card:rgba(12,20,40,0.88);
+  --fh:'Syne',sans-serif;--fb:'Outfit',sans-serif;--fm:'JetBrains Mono',monospace
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);overflow-x:hidden;line-height:1.7}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--cyan2);border-radius:2px}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+nav.scrolled{background:rgba(6,11,24,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:.8rem 3rem}
+.nav-logo{font-family:var(--fh);font-size:1.4rem;font-weight:800;color:var(--cyan);text-decoration:none}
+.nav-logo span{color:var(--text)}
+.nav-links{display:flex;gap:1.2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.7rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--cyan)}
+.nav-cta{border:1px solid var(--cyan);color:var(--cyan);padding:.38rem 1rem;border-radius:4px;font-size:.74rem;font-weight:600;text-decoration:none;transition:all .2s}
+.nav-cta:hover{background:var(--cyan);color:var(--bg)}
+
+/* ── HERO ── */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,212,.07),transparent 70%);top:0;left:-150px;pointer-events:none}
+.hero-glow2{position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,.06),transparent 70%);bottom:5%;right:-80px;pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:0 3rem;padding-top:8rem}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(0,229,212,.08);border:1px solid rgba(0,229,212,.2);color:var(--cyan);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.34rem .9rem;border-radius:100px;margin-bottom:1.2rem;font-family:var(--fm)}
+.hero-badge::before{content:'';width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+h1.hero-h1{font-family:var(--fh);font-size:clamp(2.8rem,6vw,5.2rem);font-weight:800;line-height:1;letter-spacing:-.03em;margin-bottom:.85rem}
+.h1-name{display:block;color:var(--text)}
+.h1-typed{display:block;color:var(--cyan);min-height:1.1em}
+.hero-hook{font-size:clamp(.9rem,1.5vw,1rem);color:var(--sub);max-width:640px;margin-bottom:.55rem;line-height:1.85;font-weight:500}
+.hero-hook em{color:var(--cyan);font-style:normal;font-weight:600}
+.hero-sub{font-size:.9rem;color:var(--muted);max-width:560px;margin-bottom:1.5rem;line-height:1.85}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1.6rem}
+.btn-p{background:var(--cyan);color:var(--bg);padding:.72rem 1.5rem;border-radius:4px;font-weight:700;font-size:.85rem;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
+.btn-p:hover{background:var(--cyan2);transform:translateY(-2px)}
+.btn-s{background:transparent;color:var(--text);padding:.72rem 1.5rem;border-radius:4px;font-weight:600;font-size:.85rem;text-decoration:none;border:1px solid rgba(226,234,248,.14);transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
+.btn-s:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px)}
+.btn-g{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.28);color:var(--purple);padding:.72rem 1.5rem;border-radius:4px;font-weight:600;font-size:.85rem;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
+.btn-g:hover{background:rgba(139,92,246,.22);transform:translateY(-2px)}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tag{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--muted);font-size:.68rem;padding:.22rem .65rem;border-radius:3px;font-family:var(--fm)}
+.hero-scroll{position:absolute;bottom:1.8rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:var(--muted);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-family:var(--fm)}
+.scroll-line{width:1px;height:32px;background:linear-gradient(var(--muted),transparent);animation:sa 2s infinite}
+@keyframes sa{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ── STATS ── */
+#stats{padding:3.5rem 3rem;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stats-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1.4rem}
+.stat-item{text-align:center}
+.stat-num{font-family:var(--fh);font-size:2.6rem;font-weight:800;color:var(--cyan);line-height:1;display:block}
+.stat-label{font-size:.78rem;color:var(--sub);margin-top:.32rem;line-height:1.5;white-space:pre-line}
+
+/* ── SECTION COMMON ── */
+section{padding:5rem 3rem}
+.sw{max-width:1200px;margin:0 auto}
+.sl{font-family:var(--fm);font-size:.68rem;color:var(--cyan);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.6rem;display:flex;align-items:center;gap:.6rem}
+.sl::before{content:'';width:22px;height:1px;background:var(--cyan)}
+h2.st{font-family:var(--fh);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-.02em;margin-bottom:.8rem;line-height:1.1;color:var(--text)}
+.sd{color:var(--sub);max-width:560px;font-size:.94rem;line-height:1.85;margin-bottom:2.5rem}
+
+/* ── JOURNEY ── */
+#journey{background:var(--bg);position:relative;overflow:hidden}
+#journey::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(transparent,rgba(0,229,212,.15) 10%,rgba(0,229,212,.15) 90%,transparent);pointer-events:none}
+.journey-chapters{display:flex;flex-direction:column;gap:0;position:relative;padding:1rem 0 2rem}
+.journey-chapter{display:grid;grid-template-columns:1fr 60px 1fr;align-items:start;gap:0;position:relative}
+.journey-chapter:nth-child(even) .jc-content{grid-column:3;grid-row:1;text-align:left;padding-left:2.5rem}
+.journey-chapter:nth-child(even) .jc-empty{grid-column:1;grid-row:1}
+.journey-chapter:nth-child(odd) .jc-content{grid-column:1;grid-row:1;text-align:right;padding-right:2.5rem}
+.journey-chapter:nth-child(odd) .jc-empty{grid-column:3;grid-row:1}
+.jc-node{grid-column:2;grid-row:1;display:flex;flex-direction:column;align-items:center;gap:0;z-index:2;padding-top:.6rem}
+.jc-dot{width:44px;height:44px;border-radius:50%;border:2px solid var(--cyan);background:var(--bg);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:.78rem;font-weight:800;color:var(--cyan);box-shadow:0 0 18px rgba(0,229,212,.22);flex-shrink:0}
+.jc-line{width:1px;height:100%;background:rgba(0,229,212,.12);margin-top:0}
+.journey-chapter:last-child .jc-line{display:none}
+.jc-content{padding-bottom:4rem}
+.jc-num{font-family:var(--fm);font-size:.65rem;color:var(--cyan);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem}
+.jc-title{font-family:var(--fh);font-size:1.3rem;font-weight:800;color:var(--text);margin-bottom:.28rem;line-height:1.15}
+.jc-date{font-family:var(--fm);font-size:.7rem;color:var(--gold);font-weight:600;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);padding:.18rem .7rem;border-radius:3px;display:inline-block;margin-bottom:.9rem}
+.jc-body{font-size:.88rem;color:var(--sub);line-height:1.85}
+.jc-body p{margin-bottom:.7rem}
+.jc-body p:last-child{margin-bottom:0}
+.jc-body strong{color:var(--text);font-weight:600}
+.jc-body em{color:var(--cyan);font-style:normal;font-weight:500}
+
+/* ── EXPERIENCE ── */
+#experience{background:var(--bg2)}
+.exp-tabs{display:flex;gap:.55rem;margin-bottom:2rem;flex-wrap:wrap}
+.exp-tab{background:transparent;border:1px solid var(--border);color:var(--muted);padding:.42rem 1.1rem;border-radius:100px;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--fm)}
+.exp-tab.active,.exp-tab:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,212,.06)}
+.exp-tab.int-tab.active,.exp-tab.int-tab:hover{border-color:var(--purple);color:var(--purple);background:rgba(139,92,246,.06)}
+.exp-panel{display:none}.exp-panel.active{display:flex;flex-direction:column;gap:1.4rem}
+.exp-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.8rem 2rem;position:relative;overflow:hidden;transition:border-color .3s}
+.exp-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--cyan),var(--purple));border-radius:3px 0 0 3px}
+.exp-card.intern::before{background:linear-gradient(180deg,var(--purple),var(--gold))}
+.exp-card:hover{border-color:rgba(0,229,212,.3)}
+.exp-header{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:.8rem;margin-bottom:1rem}
+.exp-role{font-family:var(--fh);font-size:1.12rem;font-weight:800;color:var(--text)}
+.exp-growth{display:inline-flex;align-items:center;gap:.35rem;background:rgba(0,229,212,.08);border:1px solid rgba(0,229,212,.18);color:var(--cyan);font-size:.64rem;font-weight:600;padding:.18rem .65rem;border-radius:100px;margin-top:.4rem;font-family:var(--fm)}
+.exp-company{font-size:.88rem;color:var(--sub);margin-top:.3rem;font-weight:500}
+.exp-company strong{color:var(--text)}
+.exp-date{font-family:var(--fm);font-size:.7rem;color:var(--gold);font-weight:600;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);padding:.22rem .7rem;border-radius:3px;white-space:nowrap}
+.exp-note{font-family:var(--fm);font-size:.63rem;color:var(--red);opacity:.75;margin-top:.3rem;text-align:right}
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:.9rem}
+.exp-bullets li{font-size:.86rem;color:var(--sub);padding-left:1.1rem;position:relative;line-height:1.7}
+.exp-bullets li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:.75rem;top:.06rem}
+.exp-bullets li strong{color:var(--text)}
+.exp-tags{display:flex;flex-wrap:wrap;gap:.32rem}
+.exp-tag{background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.15);color:var(--purple);font-size:.63rem;padding:.14rem .5rem;border-radius:3px;font-family:var(--fm)}
+
+/* ── EDUCATION ── */
+#education{background:var(--bg)}
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.2rem}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.6rem 1.8rem;display:flex;align-items:flex-start;gap:1.2rem;transition:all .25s}
+.edu-card:hover{border-color:rgba(139,92,246,.35);transform:translateY(-3px)}
+.edu-icon{width:44px;height:44px;min-width:44px;border-radius:8px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.22);display:flex;align-items:center;justify-content:center;font-size:1.15rem}
+.edu-degree{font-family:var(--fh);font-size:1rem;font-weight:700;color:var(--text);line-height:1.25;margin-bottom:.3rem}
+.edu-school{font-size:.84rem;color:var(--cyan);font-weight:500;margin-bottom:.22rem}
+.edu-year{font-size:.72rem;color:var(--muted);font-family:var(--fm)}
+.edu-badge{display:inline-block;font-family:var(--fm);font-size:.63rem;font-weight:600;padding:.15rem .5rem;border-radius:3px;margin-top:.38rem}
+.edu-badge.masters{background:rgba(0,229,212,.08);border:1px solid rgba(0,229,212,.2);color:var(--cyan)}
+.edu-badge.bachelors{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);color:var(--purple)}
+
+/* ── PROJECTS ── */
+#projects{background:var(--bg2)}
+.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.2rem}
+.pc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.6rem;transition:all .3s;position:relative;overflow:hidden}
+.pc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,229,212,.04),transparent 60%);opacity:0;transition:opacity .3s;pointer-events:none}
+.pc:hover{border-color:rgba(0,229,212,.4);transform:translateY(-4px)}
+.pc:hover::before{opacity:1}
+.pn{font-family:var(--fm);font-size:.64rem;color:var(--cyan);letter-spacing:.07em;margin-bottom:.55rem;opacity:.65}
+.pt{font-family:var(--fh);font-size:1.08rem;font-weight:700;color:var(--text);margin-bottom:.44rem;letter-spacing:-.01em;line-height:1.2}
+.pd{color:var(--sub);font-size:.84rem;line-height:1.7;margin-bottom:.85rem}
+.pi{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.85rem}
+.ib{background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);color:var(--gold);font-size:.66rem;font-weight:600;padding:.17rem .55rem;border-radius:3px;font-family:var(--fm)}
+.ptools{display:flex;flex-wrap:wrap;gap:.28rem;margin-bottom:.65rem}
+.tt{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--muted);font-size:.64rem;padding:.14rem .46rem;border-radius:3px;font-family:var(--fm)}
+.pconf{display:flex;align-items:center;gap:.34rem;font-size:.66rem;color:rgba(148,163,196,.45);margin-top:.55rem;font-family:var(--fm)}
+.cdot{width:4px;height:4px;background:rgba(148,163,196,.3);border-radius:50%;flex-shrink:0}
+.pl{display:inline-flex;align-items:center;gap:.34rem;color:var(--cyan);font-size:.75rem;font-weight:600;text-decoration:none;margin-top:.75rem;transition:gap .2s}
+.pl:hover{gap:.58rem}
+
+/* ── CERTS ── */
+#certifications{background:var(--bg)}
+.cert-tabs{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:2rem}
+.cert-tab{background:transparent;border:1px solid var(--border);color:var(--muted);padding:.42rem 1rem;border-radius:100px;font-size:.74rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--fm)}
+.cert-tab.active,.cert-tab:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,212,.06)}
+.cert-tab.az-tab.active,.cert-tab.az-tab:hover{border-color:var(--purple);color:var(--purple);background:rgba(139,92,246,.06)}
+.cert-tab.comp-tab.active,.cert-tab.comp-tab:hover{border-color:var(--gold);color:var(--gold);background:rgba(245,166,35,.06)}
+.cert-panel{display:none}.cert-panel.active{display:block}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:.8rem}
+.cc{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:.95rem 1.1rem;display:flex;align-items:center;gap:.8rem;transition:all .25s}
+.cc:hover{border-color:rgba(0,229,212,.3);transform:translateX(3px)}
+.ci{width:34px;height:34px;min-width:34px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.88rem}
+.ci.ibm{background:rgba(0,122,255,.12)}.ci.ms{background:rgba(0,120,215,.12)}.ci.ge{background:rgba(0,229,212,.1)}
+.ci.fi{background:rgba(245,166,35,.1)}.ci.da{background:rgba(139,92,246,.1)}.ci.pm{background:rgba(34,197,94,.1)}
+.ci.az{background:rgba(0,120,215,.1)}.ci.li{background:rgba(0,119,181,.12)}.ci.ud{background:rgba(236,95,67,.1)}
+.cert-info{flex:1;min-width:0}
+.cn{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.3}
+.ciss{font-size:.69rem;color:var(--muted);margin-top:.1rem;font-family:var(--fm)}
+.cs{font-size:.66rem;font-family:var(--fm);margin-top:.13rem}
+.cs.done{color:var(--cyan)}.cs.prog{color:var(--gold)}
+.cert-pdf{display:inline-flex;align-items:center;gap:.28rem;background:rgba(0,229,212,.08);border:1px solid rgba(0,229,212,.18);color:var(--cyan);font-size:.63rem;font-weight:600;padding:.2rem .6rem;border-radius:3px;text-decoration:none;margin-top:.32rem;transition:all .2s;font-family:var(--fm);white-space:nowrap}
+.cert-pdf:hover{background:rgba(0,229,212,.18)}
+.az-grid,.comp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:.8rem}
+.az-card,.comp-card{background:var(--card);border:1px solid rgba(139,92,246,.2);border-radius:8px;padding:1.05rem 1.15rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:all .25s}
+.az-card:hover{border-color:rgba(139,92,246,.45);transform:translateX(3px)}
+.comp-card{border-color:rgba(245,166,35,.18)}
+.comp-card:hover{border-color:rgba(245,166,35,.4);transform:translateX(3px)}
+.az-left,.comp-left{flex:1;min-width:0}
+.az-name,.comp-name{font-size:.84rem;font-weight:600;color:var(--text);line-height:1.3}
+.az-meta,.comp-meta{font-size:.7rem;color:var(--muted);margin-top:.16rem;font-family:var(--fm)}
+.az-badge{font-size:.63rem;font-family:var(--fm);font-weight:600;padding:.18rem .55rem;border-radius:3px;background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.25);color:var(--purple);margin-top:.28rem;display:inline-block}
+.comp-result{font-size:.63rem;font-family:var(--fm);font-weight:600;padding:.18rem .55rem;border-radius:3px;background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.22);color:var(--gold);margin-top:.28rem;display:inline-block}
+.az-pdf,.comp-pdf{display:inline-flex;align-items:center;gap:.28rem;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);color:var(--purple);font-size:.63rem;font-weight:600;padding:.28rem .65rem;border-radius:3px;text-decoration:none;transition:all .2s;font-family:var(--fm);white-space:nowrap;flex-shrink:0}
+.az-pdf:hover{background:rgba(139,92,246,.2)}
+.comp-pdf{background:rgba(245,166,35,.08);border-color:rgba(245,166,35,.2);color:var(--gold)}
+.comp-pdf:hover{background:rgba(245,166,35,.18)}
+
+/* ── ARTICLES ── */
+#articles{background:var(--bg2)}
+.art-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem}
+.art-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all .3s;display:flex;flex-direction:column}
+.art-card:hover{border-color:rgba(0,229,212,.3);transform:translateY(-3px)}
+.art-top{height:4px;background:linear-gradient(90deg,var(--cyan),var(--purple))}
+.art-body{padding:1.4rem;flex:1;display:flex;flex-direction:column}
+.art-num{font-family:var(--fm);font-size:.63rem;color:var(--cyan);letter-spacing:.1em;margin-bottom:.55rem;opacity:.65}
+.art-title{font-family:var(--fh);font-size:.98rem;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:.75rem}
+.art-summary{font-size:.84rem;color:var(--sub);line-height:1.75;flex:1;margin-bottom:1rem}
+.art-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1rem}
+.art-tag{background:rgba(0,229,212,.06);border:1px solid rgba(0,229,212,.14);color:var(--cyan);font-size:.63rem;padding:.14rem .48rem;border-radius:3px;font-family:var(--fm)}
+.art-btn{display:inline-flex;align-items:center;gap:.38rem;background:rgba(0,119,181,.1);border:1px solid rgba(0,119,181,.25);color:#5BA3D0;font-size:.74rem;font-weight:600;padding:.42rem .9rem;border-radius:4px;text-decoration:none;transition:all .2s;font-family:var(--fm);align-self:flex-start}
+.art-btn:hover{background:rgba(0,119,181,.22);color:#7BBDE8}
+
+/* ── RECOMMENDATIONS ── */
+#recommendations{background:var(--bg)}
+.rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.2rem}
+.rec-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.5rem;position:relative;transition:all .3s;overflow:hidden}
+.rec-card::before{content:'"';position:absolute;top:.5rem;right:1.1rem;font-size:5rem;font-family:var(--fh);color:rgba(0,229,212,.05);line-height:1;pointer-events:none}
+.rec-card:hover{border-color:rgba(0,229,212,.26);transform:translateY(-3px)}
+.rec-top{display:flex;align-items:center;gap:.85rem;margin-bottom:1rem}
+.rec-avatar{width:40px;height:40px;min-width:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:.9rem;font-weight:800;color:var(--bg)}
+.rec-name{font-size:.9rem;font-weight:700;color:var(--text);line-height:1.2}
+.rec-title{font-size:.7rem;color:var(--muted);margin-top:.1rem;line-height:1.3}
+.rec-company{font-size:.67rem;color:var(--cyan);font-family:var(--fm);margin-top:.06rem}
+.rec-quote{font-size:.84rem;color:var(--sub);line-height:1.75;font-style:italic}
+.rec-badge{display:inline-flex;align-items:center;gap:.28rem;background:rgba(0,119,181,.08);border:1px solid rgba(0,119,181,.2);color:#5BA3D0;font-size:.62rem;font-weight:600;padding:.18rem .6rem;border-radius:3px;margin-top:.85rem;font-family:var(--fm)}
+
+/* ── SKILLS ── */
+#skills{background:var(--bg2)}
+.skills-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem}
+.skill-group-title{font-family:var(--fh);font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:1.1rem;display:flex;align-items:center;gap:.55rem}
+.skill-group-title::before{content:'';width:16px;height:2px;background:var(--cyan);border-radius:1px}
+.skill-item{margin-bottom:.95rem}
+.skill-header{display:flex;justify-content:space-between;margin-bottom:.35rem}
+.skill-name{font-size:.82rem;color:var(--sub);font-weight:500}
+.skill-pct{font-size:.68rem;color:var(--cyan);font-family:var(--fm);font-weight:600}
+.skill-bar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.skill-fill{height:100%;border-radius:2px;width:0;transition:width 1.3s cubic-bezier(.4,0,.2,1);background:linear-gradient(90deg,var(--cyan),var(--purple))}
+.tech-pills{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.4rem}
+.tp{background:rgba(0,229,212,.05);border:1px solid rgba(0,229,212,.13);color:var(--cyan);font-size:.7rem;padding:.28rem .75rem;border-radius:100px;font-family:var(--fm);transition:all .2s;cursor:default}
+.tp:hover{background:rgba(0,229,212,.12);transform:translateY(-1px)}
+.tp.pp{background:rgba(139,92,246,.05);border-color:rgba(139,92,246,.17);color:var(--purple)}
+.tp.gp{background:rgba(245,166,35,.05);border-color:rgba(245,166,35,.17);color:var(--gold)}
+.tp.gn{background:rgba(34,197,94,.05);border-color:rgba(34,197,94,.17);color:var(--green)}
+
+/* ── GAME DEV ── */
+#gamedev{background:#07041A;position:relative;overflow:hidden}
+#game-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+#gamedev::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(139,92,246,.015) 3px,rgba(139,92,246,.015) 4px);pointer-events:none;z-index:0}
+#gamedev .sw{position:relative;z-index:1}
+.game-story{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-bottom:3rem}
+.game-story-block{background:rgba(15,8,40,.72);border:1px solid rgba(139,92,246,.18);border-radius:10px;padding:1.6rem;backdrop-filter:blur(8px)}
+.gs-label{font-family:var(--fm);font-size:.65rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.65rem;display:flex;align-items:center;gap:.45rem}
+.gs-label::before{content:'';width:14px;height:1px;background:var(--cyan)}
+.gs-title{font-family:var(--fh);font-size:1.05rem;font-weight:800;color:var(--text);margin-bottom:.65rem;line-height:1.2}
+.gs-body{font-size:.84rem;color:var(--sub);line-height:1.82}
+.gs-body p{margin-bottom:.65rem}
+.gs-body p:last-child{margin-bottom:0}
+.gs-body strong{color:var(--text)}
+.gs-body em{color:var(--cyan);font-style:normal}
+.gtk{background:rgba(10,6,30,.72);border:1px solid rgba(139,92,246,.22);border-radius:10px;padding:1.3rem;margin-bottom:2.5rem;backdrop-filter:blur(10px)}
+.tktt{font-family:var(--fm);font-size:.68rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.8rem}
+.tkg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.8rem}
+.tki strong{display:block;font-size:.78rem;color:var(--text);font-weight:600;margin-bottom:.26rem}
+.tki span{font-size:.75rem;color:var(--sub);line-height:1.6}
+.gp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.3rem}
+.gc{background:rgba(15,8,40,.85);border:1px solid rgba(139,92,246,.25);border-radius:10px;overflow:hidden;transition:all .3s;backdrop-filter:blur(12px)}
+.gc:hover{border-color:rgba(139,92,246,.5);transform:translateY(-4px)}
+.gch{background:linear-gradient(135deg,rgba(139,92,246,.14),rgba(6,11,24,.9));padding:1.3rem 1.5rem;border-bottom:1px solid rgba(139,92,246,.13)}
+.gpr{display:flex;align-items:center;gap:.5rem;margin-bottom:.55rem;flex-wrap:wrap}
+.gpb{font-family:var(--fm);font-size:.63rem;font-weight:600;padding:.16rem .55rem;border-radius:3px}
+.gpb.live{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);color:var(--green)}
+.gpb.dev{background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.25);color:var(--gold)}
+.gpb.droid{background:rgba(0,229,212,.08);border:1px solid rgba(0,229,212,.2);color:var(--cyan)}
+.gpb.ios{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.25);color:var(--purple)}
+.gtitle{font-family:var(--fh);font-size:1.2rem;font-weight:800;color:var(--text);letter-spacing:-.01em;margin-bottom:.3rem}
+.gsub{font-size:.76rem;color:var(--muted)}
+.gcb{padding:1.3rem 1.5rem}
+.gdesc{color:var(--sub);font-size:.84rem;line-height:1.75;margin-bottom:.95rem}
+.gbl{list-style:none;display:flex;flex-direction:column;gap:.46rem;margin-bottom:1rem}
+.gbl li{font-size:.82rem;color:var(--sub);padding-left:.9rem;position:relative;line-height:1.6}
+.gbl li::before{content:'→';position:absolute;left:0;color:var(--purple);font-size:.7rem}
+.gtools{display:flex;flex-wrap:wrap;gap:.28rem;margin-bottom:.95rem}
+.gto{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.17);color:var(--purple);font-size:.63rem;padding:.15rem .48rem;border-radius:3px;font-family:var(--fm)}
+.glink{display:inline-flex;align-items:center;gap:.36rem;background:var(--green);color:#061A08;padding:.48rem 1.05rem;border-radius:4px;font-size:.78rem;font-weight:700;text-decoration:none;transition:all .2s}
+.glink:hover{opacity:.85;transform:translateY(-1px)}
+.glink.proto{background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.28);color:var(--gold)}
+
+/* ── ACTIVITIES ── */
+#activities{background:var(--bg2)}
+.act-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem;margin-bottom:2rem}
+.act-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem;transition:all .25s}
+.act-card:hover{border-color:rgba(0,229,212,.28);transform:translateY(-3px)}
+.act-cat{font-family:var(--fm);font-size:.65rem;color:var(--cyan);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.85rem;display:flex;align-items:center;gap:.45rem}
+.act-cat::before{content:'';width:14px;height:1px;background:var(--cyan)}
+.act-items{display:flex;flex-direction:column;gap:.75rem}
+.act-item{display:flex;align-items:flex-start;gap:.65rem}
+.act-icon{font-size:.95rem;min-width:20px;margin-top:.1rem}
+.act-text{font-size:.84rem;color:var(--sub);line-height:1.6}
+.act-text strong{color:var(--text);display:block;font-size:.86rem}
+.act-year{font-family:var(--fm);font-size:.63rem;color:var(--gold);margin-top:.12rem}
+.fun-card{background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(0,229,212,.06));border:1px solid rgba(139,92,246,.25);border-radius:12px;padding:2rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+.fun-emoji{font-size:3.5rem;line-height:1}
+.fun-title{font-family:var(--fh);font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:.4rem}
+.fun-desc{color:var(--sub);font-size:.88rem;line-height:1.78;max-width:640px}
+.fun-desc strong{color:var(--cyan)}
+.fun-tags{display:flex;flex-wrap:wrap;gap:.38rem;margin-top:.75rem}
+.fun-tag{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.18);color:var(--purple);font-size:.68rem;padding:.2rem .6rem;border-radius:100px;font-family:var(--fm)}
+
+/* ── CONTACT ── */
+#contact{background:var(--bg);position:relative;overflow:hidden}
+#contact::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,212,.05),transparent 70%);top:-150px;right:-100px;pointer-events:none}
+.ctgrid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.ctxt p{color:var(--sub);line-height:1.9;font-size:.92rem;margin-bottom:1.1rem}
+.avb{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem}
+.av{font-family:var(--fm);font-size:.68rem;padding:.25rem .7rem;border-radius:3px;font-weight:600}
+.av.on{background:rgba(0,229,212,.08);border:1px solid rgba(0,229,212,.2);color:var(--cyan)}
+.av.re{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);color:var(--purple)}
+.av.hy{background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.2);color:var(--gold)}
+.av.ro{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);color:var(--green)}
+.clinks{display:flex;flex-direction:column;gap:.7rem}
+.clink{display:flex;align-items:center;gap:.8rem;color:var(--text);text-decoration:none;font-size:.88rem;font-weight:500;transition:color .2s}
+.clink:hover{color:var(--cyan)}
+.cli{width:33px;height:33px;border-radius:6px;background:rgba(0,229,212,.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.82rem;transition:all .2s;flex-shrink:0}
+.clink:hover .cli{background:rgba(0,229,212,.17);border-color:rgba(0,229,212,.38)}
+.cf{display:flex;flex-direction:column;gap:.8rem}
+.cf input,.cf textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:.78rem .9rem;color:var(--text);font-family:var(--fb);font-size:.86rem;outline:none;transition:border-color .2s;resize:none}
+.cf input:focus,.cf textarea:focus{border-color:rgba(0,229,212,.38)}
+.cf input::placeholder,.cf textarea::placeholder{color:var(--muted)}
+.cf button{background:var(--cyan);color:var(--bg);padding:.8rem;border:none;border-radius:4px;font-weight:700;font-size:.87rem;cursor:pointer;transition:all .2s;width:100%;font-family:var(--fb)}
+.cf button:hover{background:var(--cyan2);transform:translateY(-2px)}
+.msg-sent{display:none;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:var(--green);padding:.82rem;border-radius:6px;text-align:center;font-size:.86rem;font-weight:600}
+.msg-sent.show{display:block}
+
+/* ── FOOTER ── */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:1.6rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
+.fn{font-family:var(--fh);font-size:.95rem;font-weight:800;color:var(--cyan)}
+.fc{color:var(--muted);font-size:.74rem}
+.fl{display:flex;gap:1.2rem}
+.fl a{color:var(--muted);text-decoration:none;font-size:.74rem;transition:color .2s}
+.fl a:hover{color:var(--cyan)}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.rv.visible{opacity:1;transform:translateY(0)}
+.rvl{opacity:0;transform:translateX(-22px);transition:opacity .7s ease,transform .7s ease}
+.rvl.visible{opacity:1;transform:translateX(0)}
+.rvr{opacity:0;transform:translateX(22px);transition:opacity .7s ease,transform .7s ease}
+.rvr.visible{opacity:1;transform:translateX(0)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.4s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:.9rem 1.5rem}nav.scrolled{padding:.75rem 1.5rem}
+  .nav-links{display:none}
+  .hero-content{padding:0 1.5rem;padding-top:6.5rem}
+  section{padding:3.5rem 1.5rem}
+  #stats{padding:2.5rem 1.5rem}
+  .ctgrid,.skills-wrap,.game-story{grid-template-columns:1fr;gap:2rem}
+  footer{flex-direction:column;text-align:center;padding:1.2rem}
+  .pg,.gp-grid,.act-grid,.rec-grid,.edu-grid,.art-grid{grid-template-columns:1fr}
+  .journey-chapter{grid-template-columns:30px 1fr}
+  .journey-chapter:nth-child(odd) .jc-content,
+  .journey-chapter:nth-child(even) .jc-content{grid-column:2;grid-row:1;text-align:left;padding-left:1.5rem;padding-right:0}
+  .journey-chapter:nth-child(odd) .jc-empty,
+  .journey-chapter:nth-child(even) .jc-empty{display:none}
+  .jc-node{grid-column:1}
+  #journey::before{left:15px}
+}
 </style>
 </head>
 <body>
-<div class="logo">AB.</div>
-<div class="msg">
-  Redirecting to portfolio
-  <div class="dots">
-    <div class="dot"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
+
+<nav id="nav">
+  <a href="#hero" class="nav-logo">AB<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#journey">Story</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#recommendations">Reviews</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#gamedev">Games</a></li>
+    <li><a href="#activities">Activities</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://github.com/Ankitbharti2834" target="_blank" rel="noopener noreferrer" class="nav-cta">GitHub ↗</a>
+</nav>
+
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-glow"></div><div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">⬤ Open to New Opportunities</div>
+    <h1 class="hero-h1">
+      <span class="h1-name">Ankit Bharti</span>
+      <span class="h1-typed" id="typed"></span>
+    </h1>
+    <p class="hero-hook">From a <em>COVID layoff in India</em> to enterprise data architecture in the U.S. defense sector — and a <em>published game on Google Play Store</em>.</p>
+    <p class="hero-sub">Building enterprise-grade BI pipelines, AI automation, and cloud data architectures. 3+ years of real-world impact. Advancing into Artificial Intelligence.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-p">Data Projects →</a>
+      <a href="#gamedev" class="btn-g">🎮 Game Projects →</a>
+      <a href="#contact" class="btn-s">Contact Me</a>
+    </div>
+    <div class="hero-tags">
+      <span class="tag">Power BI</span><span class="tag">Azure Synapse</span><span class="tag">Python</span>
+      <span class="tag">ETL Engineering</span><span class="tag">GPT Automation</span><span class="tag">SQL</span>
+      <span class="tag">DAX</span><span class="tag">Dynamics 365</span><span class="tag">Unity</span><span class="tag">Blender 4.4</span>
+    </div>
   </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<section id="stats">
+  <div class="stats-grid" id="stats-grid"></div>
+</section>
+
+<!-- ── JOURNEY ── -->
+<section id="journey">
+  <div class="sw">
+    <div class="sl">My Story</div>
+    <h2 class="st rv">The Journey Behind<br>the Portfolio.</h2>
+    <p class="sd rv">This is not a resume. This is the path — the setbacks, the decisions, the chances taken, and the results built from each one.</p>
+    <div class="journey-chapters" id="journey-chapters"></div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="sw">
+    <div class="sl">Professional Experience</div>
+    <h2 class="st rv">3+ Years. Real Companies.<br>Measurable Results.</h2>
+    <p class="sd rv">From defense-adjacent enterprise systems to university data operations — delivering BI, automation, and analytics at every level.</p>
+    <div class="exp-tabs">
+      <button class="exp-tab active" onclick="switchExpTab('roles',this)">💼 Roles (<span id="role-count">0</span>)</button>
+      <button class="exp-tab int-tab" onclick="switchExpTab('internships',this)">🚀 Internships (<span id="int-count">0</span>)</button>
+    </div>
+    <div id="panel-roles" class="exp-panel active" id="exp-roles"></div>
+    <div id="panel-internships" class="exp-panel" id="exp-internships"></div>
+  </div>
+</section>
+
+<!-- ── EDUCATION ── -->
+<section id="education">
+  <div class="sw">
+    <div class="sl">Education</div>
+    <h2 class="st rv">Academic Foundation.</h2>
+    <div class="edu-grid" id="edu-grid"></div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="sw">
+    <div class="sl">Data Portfolio</div>
+    <h2 class="st rv">Enterprise Projects.<br>Real Impact. Real Scale.</h2>
+    <p class="sd rv">Delivered as a full-time employee within defense-adjacent and institutional environments. Repositories demonstrate equivalent capability using synthetic data.</p>
+    <div class="pg" id="projects-grid"></div>
+  </div>
+</section>
+
+<!-- ── CERTIFICATIONS ── -->
+<section id="certifications">
+  <div class="sw">
+    <div class="sl">Credentials</div>
+    <h2 class="st rv">Certifications, Azure Achievements<br>&amp; Competitions.</h2>
+    <p class="sd rv">Click any View PDF button to open the certificate directly. Competitions were completed during academic years in India.</p>
+    <div class="cert-tabs">
+      <button class="cert-tab active" onclick="switchTab('certs',this)">🎓 Certifications (<span id="cert-count">0</span>)</button>
+      <button class="cert-tab az-tab" onclick="switchTab('azure',this)">☁ Azure Achievements (<span id="az-count">0</span>)</button>
+      <button class="cert-tab comp-tab" onclick="switchTab('comps',this)">🏆 Competitions (<span id="comp-count">0</span>)</button>
+    </div>
+    <div id="panel-certs" class="cert-panel active"><div class="cg" id="certs-grid"></div></div>
+    <div id="panel-azure" class="cert-panel"><div class="az-grid" id="azure-grid"></div></div>
+    <div id="panel-comps" class="cert-panel"><div class="comp-grid" id="comps-grid"></div></div>
+  </div>
+</section>
+
+<!-- ── ARTICLES ── -->
+<section id="articles">
+  <div class="sw">
+    <div class="sl">LinkedIn Articles</div>
+    <h2 class="st rv">Writing About What<br>I Work With.</h2>
+    <p class="sd rv">Published articles on Azure, Data Science, and cloud analytics — sharing practical insights from hands-on enterprise experience.</p>
+    <div class="art-grid" id="art-grid"></div>
+  </div>
+</section>
+
+<!-- ── RECOMMENDATIONS ── -->
+<section id="recommendations">
+  <div class="sw">
+    <div class="sl">LinkedIn Recommendations</div>
+    <h2 class="st rv">What Colleagues,<br>Managers &amp; Peers Say.</h2>
+    <p class="sd rv">9 recommendations from executives, managers, professors, and peers across Aware CBW, University of North Alabama, and professional networks.</p>
+    <div class="rec-grid" id="rec-grid"></div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="sw">
+    <div class="sl">Technical Skills</div>
+    <h2 class="st rv">Full-Stack Data Proficiency.</h2>
+    <p class="sd rv">From pipeline engineering to executive dashboards — cloud to code, data to decisions.</p>
+    <div class="skills-wrap" id="skills-wrap"></div>
+  </div>
+</section>
+
+<!-- ── GAME DEV ── -->
+<section id="gamedev">
+  <canvas id="game-canvas"></canvas>
+  <div class="sw">
+    <div class="sl">Game Development</div>
+    <h2 class="st rv">From data pipelines<br>to game pipelines.</h2>
+    <div class="game-story rv" id="game-story-wrap"></div>
+    <div class="gtk rv">
+      <div class="tktt">Game Development Toolkit</div>
+      <div class="tkg">
+        <div class="tki"><strong>Engines &amp; Tools</strong><span>Unity Hub · Blender 4.4 · Mixamo · Android Studio · Kivy · Google Play Console · Xcode</span></div>
+        <div class="tki"><strong>Programming &amp; Automation</strong><span>Python · Visual Studio Code · Prompt Engineering · ChatGPT · JSON · XML</span></div>
+        <div class="tki"><strong>Design &amp; Assets</strong><span>3D Modeling · Texture Optimization · Animation Rigging · Lighting · Level Design</span></div>
+        <div class="tki"><strong>Analytics &amp; Growth</strong><span>Gameplay Telemetry · QA Testing · Crash Analysis · Retention Analysis · Monetization</span></div>
+      </div>
+    </div>
+    <div class="gp-grid" id="games-grid"></div>
+  </div>
+</section>
+
+<!-- ── ACTIVITIES ── -->
+<section id="activities">
+  <div class="sw">
+    <div class="sl">Beyond the Data</div>
+    <h2 class="st rv">Leadership, Sport<br>&amp; Community.</h2>
+    <p class="sd rv">A well-rounded professional — athlete, event organizer, community volunteer, and passionate builder.</p>
+    <div class="act-grid" id="act-grid"></div>
+    <div class="fun-card rv" id="fun-card"></div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="sw">
+    <div class="sl">Get in Touch</div>
+    <h2 class="st rv">Let's build something<br>impactful together.</h2>
+    <div class="ctgrid">
+      <div class="ctxt">
+        <p class="rv">Actively exploring senior Data Analyst, BI Engineer, Analytics Lead, and Data Engineering roles. Open to relocate anywhere in the U.S. Let's connect.</p>
+        <div class="avb rv">
+          <span class="av ro">📍 Open to Relocate Anywhere</span>
+          <span class="av on">On-Site</span><span class="av re">Remote</span><span class="av hy">Hybrid</span>
+        </div>
+        <div class="clinks" id="contact-links"></div>
+      </div>
+      <div class="cf rvr">
+        <input type="text" id="f-name" placeholder="Your Name"/>
+        <input type="email" id="f-email" placeholder="Your Email"/>
+        <input type="text" id="f-subject" placeholder="Subject"/>
+        <textarea rows="5" id="f-msg" placeholder="Your message..."></textarea>
+        <button onclick="sendMessage()">Send Message →</button>
+        <div class="msg-sent" id="msg-sent">✓ Message sent! Opening your email app...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fn">Ankit Bharti</div>
+  <div class="fc">© 2025 · Atlanta, GA · Data Analytics &amp; Game Development</div>
+  <div class="fl" id="footer-links"></div>
+</footer>
+
+<script>
+// ============================================================
+//  ALL DATA — EDIT ANYTHING IN THIS CONFIG BLOCK
+// ============================================================
+const CONFIG = {
+  name:"Ankit Bharti",
+  email:"Abharti1040@gmail.com",
+  phone:"(917) 609-2096",
+  location:"Atlanta, GA",
+  linkedin:"https://linkedin.com/in/ankitbharti2834",
+  github:"https://github.com/Ankitbharti2834",
+  playstore:"https://play.google.com/store/apps/details?id=org.sudoku.chronicles1.sudoku&hl=en-US",
+
+  stats:[
+    {num:7,  suffix:"",  label:"Enterprise\nData Projects"},
+    {num:3,  suffix:"+", label:"Years of\nExperience"},
+    {num:23, suffix:"+", label:"Industry\nCertifications"},
+    {num:9,  suffix:"",  label:"LinkedIn\nRecommendations"},
+    {num:4,  suffix:"",  label:"Internships\nCompleted"},
+    {num:2,  suffix:"",  label:"Game Projects\n(1 Live)"}
+  ],
+
+  // ── MY JOURNEY ─────────────────────────────────────────────
+  journey:[
+    {
+      num:"CHAPTER 01",
+      icon:"🇮🇳",
+      title:"The Beginning — India",
+      date:"2019 – June 2021",
+      body:`<p>After completing my <strong>Bachelor's in Business Management from the University of Lucknow</strong>, I stepped into the professional world as a <strong>Data Management Analyst at Fluegel India Pvt. Ltd.</strong> — building data workflows, managing enterprise systems, and growing my passion for turning raw data into decisions that matter.</p>
+<p>Alongside my professional work, I was competing at the national level — participating in case study and analytics competitions hosted by institutions like <strong>IIT Kanpur, IIM Rohtak, Delhi Technological University, ICFAI Business School Pune, and Reliance Industries</strong>. Events like <em>Data & Beyond: A Data Analytics Competition</em>, <em>ACCS: Nationwide Analytics Case Study Competition</em>, and <em>IB-Consilium 2.0</em> sharpened my analytical thinking and kept me sharp outside of work.</p>
+<p>Then June 2021 arrived. COVID-19 had reshaped the business landscape, and the company restructured — shifting focus to remote sales. My role was made redundant. It was a moment that could have stopped everything.</p>
+<p>It didn't. I chose to move forward — <em>immediately</em>.</p>`
+    },
+    {
+      num:"CHAPTER 02",
+      icon:"✈️",
+      title:"The Turn — Florence, Alabama",
+      date:"2021 – May 2023",
+      body:`<p>Within weeks of the layoff, I was already working — taking on remote internships to stay sharp, build skills, and keep moving. That discipline paid off. I was accepted into the <strong>MBA in Information Systems program at the University of North Alabama</strong>, Florence, Alabama.</p>
+<p>That decision changed my life. UNA didn't just give me a degree — it rebuilt my foundation. I worked as a <strong>Database Coordinator</strong>, coordinated institutional data systems across departments, competed in national case study competitions, served as <strong>Treasurer of the Residence Hall Association</strong>, organized international events, volunteered in the local community, and played on the soccer team.</p>
+<p>Past was past. <em>This was the chance I needed</em> — and I made the most of every part of it.</p>`
+    },
+    {
+      num:"CHAPTER 03",
+      icon:"🚀",
+      title:"The Rise — Atlanta & Beyond",
+      date:"2023 – Present",
+      body:`<p>After graduating in May 2023, my first step in the U.S. was an on-site internship at <strong>Red Clay Consulting in Alpharetta, GA</strong> as a Tech Operator — working on security operations, VMware environments, and infrastructure support. That hands-on experience confirmed what I already knew: I thrive in technical, fast-paced environments.</p>
+<p>I then joined <strong>Aware Custom Biometric Wearables</strong> in Atlanta — a defense-adjacent company working directly with the U.S. Army, Navy, and civilian defense programs. I grew from <strong>Data Analyst → Executive Data Analyst → Management Analyst</strong> in under two years. I built enterprise ETL pipelines, automated workflows with GPT and Microsoft Copilot, delivered C-suite Power BI dashboards, and helped architect a data infrastructure trusted by military-grade programs.</p>
+<p>Then the past came back again. The major $1M project I was supporting was put on hold — the client did not renew, and the company restructured its focus entirely toward its growing defense hearing protection business. My position was eliminated — <em>not for performance, but for restructuring</em>. My SVP documented this formally in a recommendation letter. <a href="docs/recommendation-letter.pdf" target="_blank" rel="noopener noreferrer" style="color:var(--cyan);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(0,229,212,.4)">View Recommendation Letter →</a></p>
+<p>The pattern was clear — when a door closes, I build my own. I published a game on <strong>Google Play Store</strong>, continued advancing in <em>Artificial Intelligence</em>, and I'm actively writing the next chapter. It's going to be even bigger.</p>`
+    }
+  ],
+
+  // ── WORK EXPERIENCE ────────────────────────────────────────
+  roles:[
+    {
+      role:"Data Analyst",
+      growth:"Data Analyst → Executive Data Analyst → Management Analyst",
+      company:"Aware Custom Biometric Wearables",
+      location:"Atlanta, GA",
+      date:"Nov 2023 – Nov 2025",
+      note:"",
+      bullets:[
+        "Built and maintained <strong>Power BI reports and semantic models</strong> with DAX/Power Query — boosting forecast accuracy by 30%",
+        "Modeled cloud networking and device connectivity data from <strong>Dynamics 365, Dataverse, Azure Synapse</strong> — enhancing accessibility by 30%",
+        "Partnered with program managers and stakeholders in <strong>Agile sprints</strong> to prioritize reporting features, drive design quality, and track objectives",
+        "Leveraged <strong>Microsoft Copilot and GPT workflows</strong> to automate data intake and enable self-service reporting — cutting manual effort by 45%",
+        "Systematized <strong>ETL pipelines with Azure Data Factory and Power Automate</strong> — strengthening data security and reducing reporting cycle time by 40%"
+      ],
+      tags:["Power BI","DAX","Azure Synapse","ETL","GPT Automation","Dynamics 365","Power Automate","Agile"]
+    },
+    {
+      role:"Database Coordinator",
+      growth:"",
+      company:"University of North Alabama",
+      location:"Florence, AL",
+      date:"Apr 2022 – May 2023",
+      note:"",
+      bullets:[
+        "Created <strong>Power BI reports and Excel dashboards</strong> — enabling leadership to improve enrollment forecasting accuracy by 25%",
+        "Executed <strong>data validation and quality checks</strong> across institutional databases — increasing data completeness and reliability by 35%",
+        "Collaborated with finance and IT managers to define reporting requirements — ensuring <strong>100% compliance</strong> with institutional standards",
+        "Streamlined database processes — reducing reporting turnaround time by 20% and strengthening cross-departmental data reliability",
+        "Presented dashboards that <strong>improved leadership decision-making speed by 30%</strong> and enhanced forecasting precision"
+      ],
+      tags:["Power BI","Excel","Data Validation","SQL","Reporting","ETL","Compliance"]
+    },
+    {
+      role:"Data Management Analyst",
+      growth:"",
+      company:"Fluegel India Pvt. Ltd.",
+      location:"Lucknow, U.P., India",
+      date:"Sep 2019 – Jun 2021",
+      note:"Role concluded · Company restructuring due to COVID-19 impact",
+      bullets:[
+        "Managed and maintained enterprise data systems — ensuring data integrity, accuracy, and accessibility across business units",
+        "Developed data management workflows and structured reporting processes to support operational decision-making",
+        "Collaborated with cross-functional teams to standardize data collection procedures and quality assurance protocols",
+        "Built reporting models and dashboards for internal leadership tracking business performance metrics"
+      ],
+      tags:["Data Management","Reporting","Excel","SQL","Data Quality","Operations"]
+    }
+  ],
+
+  // ── INTERNSHIPS ────────────────────────────────────────────
+  internships:[
+    {
+      role:"Data Analytics Consulting Intern",
+      company:"Forage",
+      location:"Virtual Program",
+      date:"May 2021 – Jun 2021",
+      bullets:[
+        "Developed <strong>Tableau dashboards</strong> visualizing KPIs and metrics — improving executive reporting clarity and accelerating leadership decisions by 25%",
+        "Supported database tracking and performance monitoring via optimized dashboards — boosting reporting efficiency and reducing manual effort by 30%",
+        "Analyzed customer data, proposed segmentation strategies — strengthening retention and driving 20% growth in key segments",
+        "Developed structured reporting outputs, standardizing performance insights and ensuring 100% compliance with organizational requirements"
+      ],
+      tags:["Tableau","KPI Reporting","Excel","Data Analysis","Customer Segmentation"]
+    },
+    {
+      role:"Python Programming Intern",
+      company:"El-Systems Technologies",
+      location:"Varanasi, India",
+      date:"Jul 2021 – Oct 2021",
+      bullets:[
+        "Automated data sorting and basic reporting tasks using <strong>Python (Pandas, NumPy)</strong> for data manipulation and processing",
+        "Developed two functional applications — a calculator and a review system — demonstrating programming fundamentals and logic implementation",
+        "Participated in code reviews and collaborated with trainers to improve code structure, efficiency, and readability"
+      ],
+      tags:["Python","Pandas","NumPy","Automation","Application Development"]
+    },
+    {
+      role:"Financial Analyst Intern",
+      company:"KPMG (Supported via Financial Support Program)",
+      location:"Virtual Program",
+      date:"Nov 2021 – Dec 2021",
+      bullets:[
+        "Coordinated <strong>financial models for valuation and M&A analysis</strong> — improving investment accuracy and deal evaluation efficiency by 20%",
+        "Prepared financial reports and presentations for senior stakeholders — enhancing clarity, consistency, and decision-making effectiveness by 30%",
+        "Facilitated cost analysis and budgeting — identifying expense trends and optimization opportunities, reducing departmental costs by 15%",
+        "Partnered with finance and IT teams to refine reporting workflows — ensuring compliance and improving reporting efficiency by 25%",
+        "Provided actionable insights using <strong>advanced Excel modeling and business analysis</strong> — strengthening leadership's data-driven decisions"
+      ],
+      tags:["Financial Modeling","Valuation","M&A Analysis","Advanced Excel","Budgeting","Reporting"]
+    },
+    {
+      role:"Tech Operator Intern",
+      company:"Red Clay Consulting",
+      location:"Alpharetta, GA",
+      date:"Sep 2023 – Oct 2023",
+      bullets:[
+        "Helped execute security operations — assisting with firewall configuration reviews and intrusion monitoring procedures under senior supervision",
+        "Collaborated with infrastructure and support teams to troubleshoot system issues and improve incident response workflows",
+        "Facilitated management of <strong>VMware virtual environments</strong> — monitoring uptime and optimizing resource allocation across server instances"
+      ],
+      tags:["Security Operations","VMware","Firewall","Infrastructure","Incident Response"]
+    }
+  ],
+
+  // ── EDUCATION ──────────────────────────────────────────────
+  education:[
+    {degree:"MBA in Information Systems",school:"University of North Alabama",location:"Florence, AL",year:"May 2023",level:"masters",icon:"🎓"},
+    {degree:"Bachelor's in Business Management",school:"University of Lucknow",location:"India",year:"Jul 2019",level:"bachelors",icon:"🏛"}
+  ],
+
+  // ── PROJECTS ───────────────────────────────────────────────
+  projects:[
+    {num:"PROJECT 01 · AWARE CUSTOM BIOMETRIC WEARABLES",title:"Enterprise Power BI KPI Dashboard Suite",desc:"Unified 4 siloed sources into a single Power BI reporting layer connected to Azure Synapse, Dynamics 365 CRM, and SharePoint — delivering cross-functional KPI visibility to C-suite.",impact:["↑ 30% Faster Reporting","↑ 25% Forecast Accuracy"],tools:["Power BI","DAX","Azure Synapse","Dynamics 365","SQL Server","SharePoint"],confidential:"Enterprise Internal — Defense-Adjacent",github:"https://github.com/Ankitbharti2834/aware-cbw-powerbi-kpi-dashboard"},
+    {num:"PROJECT 02 · AWARE CUSTOM BIOMETRIC WEARABLES",title:"End-to-End ETL Pipeline & Azure Data Warehouse",desc:"Medallion architecture (Bronze→Silver→Gold) on Azure Synapse ingesting IoT biometric feeds, Shopify API orders, and Dynamics 365 CRM data at enterprise scale via ADF.",impact:["↑ 65% Faster Data Loads","↓ 40% Processing Effort"],tools:["Azure Data Factory","Azure Synapse","ADLS Gen2","Python","SSIS","Azure DevOps"],confidential:"Enterprise Internal — Defense-Adjacent",github:"https://github.com/Ankitbharti2834/aware-cbw-etl-azure-pipeline"},
+    {num:"PROJECT 03 · AWARE CUSTOM BIOMETRIC WEARABLES",title:"GPT-Powered Automation & AI Agent Workflows",desc:"GPT-4o document routing agents, real-time CRM anomaly detection, and automated BI report distribution eliminating 10+ manual cross-functional workflows.",impact:["↓ 45% Manual Processing","10+ Workflows Automated"],tools:["GPT API","Power Automate","Logic Apps","MS Fabric","Copilot","OAuth 2.0"],confidential:"Enterprise Internal — Defense-Adjacent",github:"https://github.com/Ankitbharti2834/aware-cbw-gpt-ai-automation"},
+    {num:"PROJECT 04 · AWARE CUSTOM BIOMETRIC WEARABLES",title:"Financial Forecasting Model & Profitability Analysis",desc:"CFO-facing financial forecasting with Python OLS models, VBA-automated variance analysis, and A/B pricing tests — identifying cost leakage across 3 product lines.",impact:["↑ 25% Forecast Accuracy","Cost Leakage Found: 3 Lines"],tools:["Python","Excel VBA","Power Query","SSRS","Power BI","SQL Server"],confidential:"Enterprise Internal — Defense-Adjacent",github:"https://github.com/Ankitbharti2834/Financial-Forecasting-Model"},
+    {num:"PROJECT 05 · AWARE CUSTOM BIOMETRIC WEARABLES",title:"E-Commerce Analytics & Sales Performance",desc:"Unified three Shopify storefronts — awarecbw.com, awareindustrial.com, awaredefense.us — with Google Analytics and BigQuery into a single Power BI reporting layer covering revenue, LTV, and fulfillment.",impact:["↓ 50% Reconciliation Effort","4 Sources → 1 Layer"],tools:["Shopify API","Google Analytics","BigQuery","GCP","Power BI","Power Automate"],confidential:"Enterprise Internal — Defense-Adjacent",github:"https://github.com/Ankitbharti2834/aware-cbw-ecommerce-analytics"},
+    {num:"PROJECT 06 · AWARE CUSTOM BIOMETRIC WEARABLES",title:"Data Quality Framework & GDPR/HIPAA Compliance Dashboard",desc:"GDPR and HIPAA-aligned governance framework with automated DQ checks, SHA-256 PII masking, retention enforcement, and compliance Power BI dashboard for auditors.",impact:["100% Audit-Ready","↓ 35% Quality Incidents"],tools:["Power BI","Dataverse","Python","Power Automate","ADLS","MS Fabric"],confidential:"Enterprise Internal — Defense-Adjacent",github:"https://github.com/Ankitbharti2834/Data-Quality-Framework-GDPR-HIPAA-Compliance"},
+    {num:"PROJECT 07 · UNIVERSITY OF NORTH ALABAMA",title:"Institutional Data Audit & Interdepartmental Database Integration",desc:"Resolved institutional data quality gaps and unified interdepartmental databases into a single, audit-ready reporting structure across academic and administrative units.",impact:["↑ 50% Data Accuracy","3+ Departments Standardized"],tools:["ETL Pipelines","Power BI","DAX","Advanced Excel","MS Office","VBA"],confidential:"Enterprise Internal — University / Education",github:"https://github.com/Ankitbharti2834/una-institutional-data-audit"}
+  ],
+
+  // ── CERTIFICATIONS ─────────────────────────────────────────
+  certifications:[
+    {name:"IBM Data Analyst",issuer:"IBM",status:"Completed",icon:"ibm",pdf:"docs/certs/IBM Data Analyst.pdf"},
+    {name:"Microsoft Power BI Data Analyst (PL-300)",issuer:"Microsoft — LinkedIn Learning",status:"In Progress",icon:"ms",pdf:"docs/certs/Microsoft Power BI Data Analyst Associate PL300 Cert Prep by Microsoft Press 2024.pdf"},
+    {name:"Apache Spark SQL for Data Analytics",issuer:"Databricks",status:"Completed",icon:"az",pdf:"docs/certs/Apache Spark SQL for Data Analytics.pdf"},
+    {name:"SQL: Data Reporting & Analysis",issuer:"LinkedIn Learning",status:"Completed",icon:"li",pdf:"docs/certs/SQL Data Reporting and Analysis.pdf"},
+    {name:"Advanced SQL for Data Scientists",issuer:"LinkedIn Learning",status:"Completed",icon:"li",pdf:"docs/certs/Advanced SQL for Data Scientists.pdf"},
+    {name:"Databases and SQL for Data Science",issuer:"IBM",status:"Completed",icon:"ibm",pdf:"docs/certs/Databases and SQL for data science.pdf"},
+    {name:"Data Visualization with Python",issuer:"IBM",status:"Completed",icon:"ibm",pdf:"docs/certs/Data Visualization with python.pdf"},
+    {name:"Data Visualization and Dashboards with Excel and Cognos",issuer:"IBM",status:"Completed",icon:"ibm",pdf:"docs/certs/Data Visualization and Dashboards with Excel and Cognos.pdf"},
+    {name:"Excel Basics for Data Analysis",issuer:"IBM",status:"Completed",icon:"ibm",pdf:"docs/certs/Excel Basics for Data Analysis.pdf"},
+    {name:"Excel Essential Training (Microsoft 365)",issuer:"LinkedIn Learning",status:"Completed",icon:"li",pdf:"docs/certs/Excel Essential Training Microsoft 365 2018.pdf"},
+    {name:"Financial Modeling and Valuation Training",issuer:"Internshala",status:"Completed",icon:"fi",pdf:"docs/certs/Financial Modeling and Valuation Training.pdf"},
+    {name:"Prompt Engineering for Generative AI",issuer:"LinkedIn Learning",status:"Completed",icon:"li",pdf:"docs/certs/Prompt Engineering for Generative AI.pdf"},
+    {name:"Artificial Intelligence and Business Strategy",issuer:"NASBA",status:"Completed",icon:"da",pdf:"docs/certs/Artificial Intelligence and Business Strategy.pdf"},
+    {name:"AI for Everyone",issuer:"DeepLearning.AI",status:"Completed",icon:"da",pdf:"docs/certs/AI for Everyone.pdf"},
+    {name:"Hands-On AI: Build a Generative Language Model from Scratch",issuer:"LinkedIn Learning",status:"Completed",icon:"li",pdf:"docs/certs/Hands-On AI Build a Generative Language Model from Scratch.pdf"},
+    {name:"Agile Analytics",issuer:"University of Virginia",status:"Completed",icon:"da",pdf:"docs/certs/Agile Analytics.pdf"},
+    {name:"Agile Meets Design Thinking",issuer:"University of Virginia",status:"Completed",icon:"da",pdf:"docs/certs/Agile Meets Design Thinking.pdf"},
+    {name:"Data-Informed Strategic Thinking",issuer:"IIBA®",status:"Completed",icon:"da",pdf:"docs/certs/Data Informed Strategic Thinking for Senior Analysts and Data Scientists.pdf"},
+    {name:"Microsoft Power Apps: AI Builder",issuer:"LinkedIn Learning",status:"Completed",icon:"ms",pdf:"docs/certs/Microsoft Power Apps AI Builder.pdf"},
+    {name:"Visualizing Advanced Charts and Graphs",issuer:"Project Management Institute (PMI)",status:"Completed",icon:"pm",pdf:"docs/certs/Visualizing Advanced Charts and Graphs.pdf"},
+    {name:"Digital Product Management: Modern Fundamentals",issuer:"University of Virginia",status:"Completed",icon:"da",pdf:"docs/certs/Digital Product Management Modern Fundamentals.pdf"},
+    {name:"Business Operations: Implementing Strategy for Results",issuer:"Project Management Institute (PMI)",status:"Completed",icon:"pm",pdf:"docs/certs/Business Operations Implementing Strategy for Results.pdf"},
+    {name:"Amazon FBA",issuer:"Udemy",status:"Completed",icon:"ud",pdf:"docs/certs/Amazon FBA.pdf"}
+  ],
+
+  // ── AZURE ACHIEVEMENTS ─────────────────────────────────────
+  azureAchievements:[
+    {name:"Introduction to End-to-End Analytics Using Microsoft Fabric",issuer:"Microsoft",type:"Learning Path",date:"2024",pdf:"docs/azure/Introduction to end-to-end analytics using Microsoft Fabric.pdf"},
+    {name:"Get Started with Lakehouses in Microsoft Fabric",issuer:"Microsoft",type:"Module",date:"2024",pdf:"docs/azure/Get started with lakehouses in Microsoft.pdf"},
+    {name:"Use Apache Spark in Microsoft Fabric",issuer:"Microsoft",type:"Module",date:"2024",pdf:"docs/azure/Use Apache Spark in Microsoft Fabric.pdf"},
+    {name:"Use Data Factory Pipelines in Microsoft Fabric",issuer:"Microsoft",type:"Module",date:"2024",pdf:"docs/azure/Use Data Factory pipelines in Microsoft Fabric.pdf"},
+    {name:"Work with Delta Lake Tables in Microsoft Fabric",issuer:"Microsoft",type:"Module",date:"2024",pdf:"docs/azure/Work with Delta Lake tables in MS Fabric.pdf"},
+    {name:"Plan and Prepare to Develop AI Solutions on Azure",issuer:"Microsoft",type:"Learning Path",date:"2025",pdf:"docs/azure/Plan and Prepare to develop AI solutions on Azure.pdf"},
+    {name:"Develop an AI App with the Azure AI Foundry SDK",issuer:"Microsoft",type:"Module",date:"2025",pdf:"docs/azure/Develop an AI app with the Azure AI Foundry SDK.pdf"},
+    {name:"Control Access to Azure Storage with Shared Access Signatures",issuer:"Microsoft",type:"Module",date:"2023",pdf:"docs/azure/Control access to Azure Storage with shared access signatures.pdf"}
+  ],
+
+  // ── COMPETITIONS ───────────────────────────────────────────
+  competitions:[
+    {name:"ACCS Nationwide Case Study Competition",organizer:"IIT Kanpur — Dept. of Industrial & Management Engineering",result:"Participant",date:"2021",pdf:"docs/competitions/ACCS Nationwide Case Study Competition.pdf"},
+    {name:"Intellectual Property Rights (IPR) Awareness Program",organizer:"Niti Aayog, Govt. of India",result:"Participant",date:"2020",pdf:"docs/competitions/Intellectual Property Rights Awareness Program.pdf"},
+    {name:"Let's Live Economics",organizer:"IIM Rohtak",result:"Participant",date:"2021",pdf:"docs/competitions/Economics Participation Certificate.pdf"},
+    {name:"Reliance Quiz-a-thon 6.0",organizer:"Reliance Industries Limited (RIL)",result:"Participant",date:"2021",pdf:"docs/competitions/Reliance Quiz-a-thon 6.0.pdf"},
+    {name:"The Shock Market",organizer:"SVKM's Narsee Monjee Institute of Management Studies, Bengaluru",result:"Participant",date:"2021",pdf:"docs/competitions/The Shock Market.pdf"},
+    {name:"IB-Consilium 2.0 — AI Based Services",organizer:"ICFAI Business School, Pune",result:"Participant",date:"2021",pdf:"docs/competitions/IBS Pune AI based services IB-Consilium 2.0.pdf"},
+    {name:"Data & Beyond",organizer:"Delhi Technological University, New Delhi",result:"Participant",date:"2021",pdf:"docs/competitions/Data & Beyond.pdf"}
+  ],
+
+  // ── LINKEDIN ARTICLES ──────────────────────────────────────
+  articles:[
+    {
+      num:"ARTICLE 01",
+      title:"Powerful Integration in Microsoft Azure Data Factory",
+      summary:"Azure Data Factory simplifies enterprise data integration by connecting structured, unstructured, and real-time sources — from SQL databases to IoT devices — through automated pipelines and a visual transformation builder. Its orchestration engine schedules and manages multi-step data workflows end-to-end, handling dependencies so every step runs reliably. Integrated with Azure Synapse, Databricks, and Machine Learning, ADF powers scalable, efficient, data-driven pipelines at enterprise scale.",
+      tags:["Azure Data Factory","ETL","Data Engineering","Cloud Integration"],
+      link:"https://www.linkedin.com/posts/ankitbharti2834_dataanalytics-azuredatafactory-dataengineering-activity-7259712342630744064-r_2B"
+    },
+    {
+      num:"ARTICLE 02",
+      title:"Unlocking the Potential of Big Data: My Analytics Journey",
+      summary:"Documenting a comprehensive big data project built on Microsoft Azure — combining Cosmos DB for scalable storage, Azure Data Factory for pipeline orchestration, and Apache Spark for distributed processing at real-time scale. Machine learning models were applied for predictive analytics, while interactive dashboards translated complexity into leadership-ready insight. The biggest lesson: sound data governance under GDPR and HIPAA is not optional — it is the foundation everything reliable is built on.",
+      tags:["Big Data","Microsoft Azure","Cloud Computing","Machine Learning"],
+      link:"https://www.linkedin.com/posts/ankitbharti2834_cloudcomputing-bigdataanalytics-microsoftazure-activity-7251709735316373504-Emqj"
+    },
+    {
+      num:"ARTICLE 03",
+      title:"Why Microsoft Azure is a Game-Changer for Business Efficiency",
+      summary:"Microsoft Azure equips businesses with everything needed to store, automate, and secure data at scale — from Blob Storage and Data Factory pipelines to Virtual Networks and Firewalls protecting cloud environments from unauthorized access. Integrated cost management tools keep cloud spending in check while scaling operations, and tools like SQL Database and Visual Studio make development significantly more efficient. For organizations ready to modernize, Azure is not just a platform — it is a measurable competitive advantage.",
+      tags:["Microsoft Azure","Cloud Security","Data Storage","Business Efficiency"],
+      link:"https://www.linkedin.com/posts/ankitbharti2834_microsoftazure-cloudcomputing-datasecurity-activity-7242207342413365249-T7GS"
+    },
+    {
+      num:"ARTICLE 04",
+      title:"The Transformative Power of Data Science in Today's World",
+      summary:"Data Science is reshaping every major industry — from personalized medicine in healthcare to fraud detection in finance and predictive maintenance in manufacturing — by transforming raw data into decisions that shape entire markets. At its core, the discipline combines statistics, programming, machine learning, and domain expertise to surface patterns that would otherwise stay invisible. As data volumes grow and computational power advances, the professionals who can navigate this landscape will define what the next decade of business looks like.",
+      tags:["Data Science","Machine Learning","AI","Industry Impact"],
+      link:"https://www.linkedin.com/posts/ankitbharti2834_datascience-bigdata-machinelearning-activity-7234961301695787009-66xf"
+    }
+  ],
+
+  // ── RECOMMENDATIONS ────────────────────────────────────────
+  recommendations:[
+    {name:"Ashley Stokes Russ",title:"SVP & CBO",company:"Aware Custom Biometric Wearables",color:"#00E5D4",quote:"Ankit consistently delivered high-quality work, ensuring the integrity, security, and performance of our data infrastructure. He approaches every task with enthusiasm, curiosity, and a solution-oriented mindset."},
+    {name:"Rohit Singh",title:"Cofounder & CEO | Strategy & Analytics",company:"RexRelic | IIM Bodh Gaya",color:"#8B5CF6",quote:"Ankit has a keen eye for detail, enabling him to identify meaningful insights from complex datasets and turn them into actionable recommendations that positively impacted our projects."},
+    {name:"DeeAnna Lind",title:"HR Director",company:"Red Clay Consulting",color:"#22C55E",quote:"During his internship with us, Ankit demonstrated his commitment through reliability, dedication, and eagerness to learn. He accepted every task with enthusiasm and demonstrated a strong work ethic."},
+    {name:"Aniket Maan",title:"Sales Manager | MBA: USA",company:"Abhinandan Ventures",color:"#F5A623",quote:"Ankit has an innate capability to delve deep into complex issues and bring forth meaningful insights that would otherwise be overlooked. He is truly exceptional in finding solutions with technical tools."},
+    {name:"Mayank Vashisht",title:"Ex-Assistant Product Manager | CSM",company:"Policybazaar | University of North Alabama",color:"#00E5D4",quote:"Ankit consistently brought creative ideas and could easily turn data into clear, actionable insights. He communicated well, worked hard, and helped keep our team on track throughout the project."},
+    {name:"Aquib Ansari",title:"Business Professional",company:"Personal & Professional Network",color:"#8B5CF6",quote:"Ankit's ability to process complex datasets, identify patterns, and extract actionable insights is truly commendable. His collaborative spirit and excellent communication skills make him a pleasure to work with."},
+    {name:"Hai Tran",title:"Cost & Pricing Analyst | MS Finance",company:"Finance Professional",color:"#22C55E",quote:"Ankit consistently demonstrated exceptional dedication, analytical skills, and teamwork. He always showed work ethic, professionalism, and passion in every project we worked on together."},
+    {name:"Yashi Srivastava",title:"Talent Acquisition Specialist",company:"SHRM-CP",color:"#F5A623",quote:"Ankit has a natural ability to learn, motivate, and share his knowledge with others — making him an asset to any team or learning environment he steps into."},
+    {name:"Maria Terrazas",title:"MBA Graduate | Project Management",company:"University of North Alabama",color:"#00E5D4",quote:"He is a fast learner, always willing to help, and takes self-initiation when he sees something needs to be done. His critical thinking and leadership skills make him a great asset to any team."}
+  ],
+
+  // ── SKILLS ─────────────────────────────────────────────────
+  skills:[
+    {group:"Business Intelligence & Visualization",items:[
+      {name:"Power BI (Reports, Dashboards, Semantic Models)",pct:95},
+      {name:"DAX & Power Query",pct:92},
+      {name:"Advanced Excel & VBA",pct:88},
+      {name:"Tableau",pct:75}
+    ]},
+    {group:"Data Engineering & Cloud",items:[
+      {name:"Azure Synapse Analytics / ADF / ADLS Gen2",pct:88},
+      {name:"ETL Pipeline Development & SSIS",pct:85},
+      {name:"MS Fabric & Azure DevOps",pct:80},
+      {name:"BigQuery / GCP",pct:72}
+    ]},
+    {group:"Programming & AI",items:[
+      {name:"SQL (SQL Server, PostgreSQL)",pct:90},
+      {name:"Python (Pandas, NumPy, OLS)",pct:82},
+      {name:"GPT API & AI Automation",pct:84},
+      {name:"Power Automate & Logic Apps",pct:86}
+    ]},
+    {group:"ERP, CRM & Governance",items:[
+      {name:"Dynamics 365 & Dataverse",pct:85},
+      {name:"Shopify API & E-Commerce Analytics",pct:80},
+      {name:"GDPR / HIPAA Compliance",pct:88},
+      {name:"Agile / Stakeholder Reporting",pct:90}
+    ]}
+  ],
+
+  techPills:[
+    {label:"Power BI",cls:""},{label:"Azure Synapse",cls:""},{label:"Python",cls:"pp"},
+    {label:"SQL",cls:"pp"},{label:"DAX",cls:""},{label:"ETL",cls:"pp"},
+    {label:"GPT API",cls:"gn"},{label:"Power Automate",cls:""},{label:"MS Fabric",cls:""},
+    {label:"Dynamics 365",cls:"gp"},{label:"Shopify API",cls:"gp"},{label:"BigQuery",cls:"pp"},
+    {label:"ADLS Gen2",cls:""},{label:"SSRS",cls:"gp"},{label:"SSIS",cls:"gp"},
+    {label:"Dataverse",cls:""},{label:"Unity",cls:"gn"},{label:"Blender 4.4",cls:"gn"},{label:"Kivy",cls:"pp"}
+  ],
+
+  // ── GAME STORIES ───────────────────────────────────────────
+  gameStories:[
+    {
+      label:"How It Started",
+      title:"One Question from My Nephew Changed Everything",
+      body:`<p>My nephew asked me one day: <strong>"Can you make a game for me?"</strong> I said yes — even though I had zero game development experience. What followed was months of learning Python's Kivy framework, structuring puzzle logic with JSON, and leveraging my <em>Prompt Engineering and AI certifications</em> to accelerate the entire build through ChatGPT.</p>
+<p>My nephew wanted ancient history woven into the levels. So each puzzle became a civilization: <strong>Sumerian Origins, Egyptian Enigma, Babylonian Bricks, Roman Grids</strong>. Things his school textbooks never covered — he learned them through the game. It went live on <strong>Google Play Store</strong>. Mission accomplished.</p>`
+    },
+    {
+      label:"The Next Challenge",
+      title:"I Played District Cricket. Now I'm Building a Cricket World.",
+      body:`<p>One win was never going to be enough. I competed at the <strong>District Cricket level in 2015</strong> — I know what it feels like to strategize, perform under pressure, and compete for real. So I decided to channel that into something nobody has seen before.</p>
+<p><strong>Cricket League</strong> is a full 3D simulation — <em>240+ rigged characters, offline tournaments, custom team editing, real cricket physics, and a 3D stadium built in Blender 4.4</em>. The next milestone is online multiplayer so it can be played from anywhere in the world. When it drops — it's going to be different from anything out there.</p>`
+    }
+  ],
+
+  // ── GAMES ──────────────────────────────────────────────────
+  games:[
+    {title:"Sudoku Chronicles",subtitle:"Published on Google Play Store · 2024 – Present",status:"LIVE",platforms:["Android"],desc:"A cultural logic-puzzle experience combining analytical problem-solving with themed storytelling — fully designed, developed, and independently deployed from concept to live production.",bullets:["Designed and developed using Python (Kivy framework), deployed via Android Studio to Google Play Store","Built 30+ interactive chapters with cultural and historical puzzle themes using JSON-based story integration","Managed end-to-end asset pipelines including performance optimization and user behavior analytics","Applied iterative content review and game design optimization throughout production cycles"],tools:["Python","Kivy","Android Studio","Google Play Console","JSON","VS Code"],link:"https://play.google.com/store/apps/details?id=org.sudoku.chronicles1.sudoku&hl=en-US",linkText:"▶ Play on Google Play Store"},
+    {title:"Cricket League",subtitle:"3D Simulation · Unity + Blender + Mixamo · 2025 – Ongoing",status:"IN DEVELOPMENT",platforms:["Android","iOS"],desc:"A large-scale 3D cricket simulation built for immersive gameplay, realistic physics, and multi-platform deployment — 240+ rigged characters, offline tournaments, custom team editing, and real cricket vibe.",bullets:["Large-scale 3D cricket stadium with realistic lighting, modular seating, and crowd dynamics in Blender 4.4","Integrated 3D assets and real cricket physics in Unity Hub, scripted via VS Code","240+ characters with full rigging via Mixamo — walk, run, bowl, bat, dive animations","Offline Tournaments, Custom Team Editing, 3D Display — next milestone: Online Multiplayer Mode","Planning multi-platform deployment via Google Play Console and Apple App Store (Xcode)"],tools:["Unity Hub","Blender 4.4","Mixamo","VS Code","Xcode","Android Studio"],link:"",linkText:"🛠 In Active Development — 2025"}
+  ],
+
+  // ── ACTIVITIES ─────────────────────────────────────────────
+  activities:{
+    sports:[
+      {icon:"🏏",title:"District Cricket Council — Winner",year:"2015",desc:"Competed and won at the District level cricket tournament in India"},
+      {icon:"⚽",title:"Soccer Club Member",year:"2022–2023",desc:"University of North Alabama Soccer Club"}
+    ],
+    leadership:[
+      {icon:"🏛",title:"Treasurer — Residence Hall Association Club",year:"2022–2023",desc:"University of North Alabama"},
+      {icon:"🎯",title:"Event Organizer",year:"2022",desc:"University of North Alabama campus events"},
+      {icon:"🌍",title:"Director of International Student Events",year:"2022",desc:"Led and directed international cultural events at University of North Alabama"}
+    ],
+    social:[
+      {icon:"🤝",title:"Volunteer — Muscle Shoals National Heritage",year:"2022",desc:"Florence, Alabama — support to elderly individuals and young students during engaging cultural events"},
+      {icon:"🏗",title:"Volunteer — Old School, Alabama",year:"2022",desc:"Aided in construction of school infrastructure to support the local community"}
+    ]
+  },
+
+  funActivity:{
+    emoji:"🏏",
+    title:"Cricket — More Than a Game",
+    desc:"From winning at the District level in 2015 to building a 3D Cricket League game from scratch — cricket has always been at the heart of who I am. It taught me <strong>strategy, teamwork, and the drive to perform under pressure</strong> — the same qualities I bring to every data project and every team I work with.",
+    tags:["District Cricket Winner 2015","Building Cricket League Game","Team Sport Mindset","Strategy & Focus"]
+  }
+};
+// ── END CONFIG ────────────────────────────────────────────────
+
+
+// ── ICON MAP ──────────────────────────────────────────────────
+const iconMap={ibm:'🔷',ms:'🔵',ge:'⚡',fi:'💰',da:'🧠',pm:'📊',az:'☁',li:'🔗',ud:'🐍'};
+const iconCls={ibm:'ibm',ms:'ms',ge:'ge',fi:'fi',da:'da',pm:'pm',az:'az',li:'li',ud:'ud'};
+
+// ── SEND MESSAGE ──────────────────────────────────────────────
+function sendMessage(){
+  const name=document.getElementById('f-name').value.trim();
+  const email=document.getElementById('f-email').value.trim();
+  const subject=document.getElementById('f-subject').value.trim();
+  const msg=document.getElementById('f-msg').value.trim();
+  if(!name||!email||!msg){alert('Please fill in your name, email, and message.');return;}
+  const body=`Name: ${name}\nEmail: ${email}\n\n${msg}`;
+  window.location.href=`mailto:${CONFIG.email}?subject=${encodeURIComponent(subject||'Portfolio Enquiry')}&body=${encodeURIComponent(body)}`;
+  setTimeout(()=>document.getElementById('msg-sent').classList.add('show'),1200);
+}
+
+// ── SWITCH TABS ───────────────────────────────────────────────
+function switchTab(tab,btn){
+  document.querySelectorAll('.cert-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.cert-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(tab==='certs'?'panel-certs':tab==='azure'?'panel-azure':'panel-comps').classList.add('active');
+  btn.classList.add('active');
+}
+function switchExpTab(tab,btn){
+  document.querySelectorAll('.exp-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.exp-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(tab==='roles'?'panel-roles':'panel-internships').classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── BUILD ─────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded',()=>{
+  const C=CONFIG;
+
+  // Stats
+  const sg=document.getElementById('stats-grid');
+  C.stats.forEach((s,i)=>{sg.innerHTML+=`<div class="stat-item rv${i?` d${Math.min(i,5)}`:''}">`+
+    `<span class="stat-num" data-t="${s.num}" data-s="${s.suffix}">0</span>`+
+    `<span class="stat-label">${s.label}</span></div>`;});
+
+  // Journey
+  const jc=document.getElementById('journey-chapters');
+  C.journey.forEach((ch,i)=>{
+    const isOdd=i%2===0;
+    jc.innerHTML+=`<div class="journey-chapter">
+      ${isOdd?`<div class="jc-content rv d1">
+        <div class="jc-num">${ch.num}</div>
+        <div class="jc-title">${ch.icon} ${ch.title}</div>
+        <div class="jc-date">${ch.date}</div>
+        <div class="jc-body">${ch.body}</div>
+      </div>`:`<div class="jc-empty"></div>`}
+      <div class="jc-node"><div class="jc-dot">${String(i+1).padStart(2,'0')}</div><div class="jc-line"></div></div>
+      ${!isOdd?`<div class="jc-content rv d1">
+        <div class="jc-num">${ch.num}</div>
+        <div class="jc-title">${ch.icon} ${ch.title}</div>
+        <div class="jc-date">${ch.date}</div>
+        <div class="jc-body">${ch.body}</div>
+      </div>`:`<div class="jc-empty"></div>`}
+    </div>`;
+  });
+
+  // Roles
+  const rolesEl=document.getElementById('panel-roles');
+  document.getElementById('role-count').textContent=C.roles.length;
+  C.roles.forEach((e,i)=>{
+    rolesEl.innerHTML+=`<div class="exp-card rv${i?' d1':''}">
+      <div class="exp-header">
+        <div><div class="exp-role">${e.role}</div>
+          ${e.growth?`<div class="exp-growth">↑ ${e.growth}</div>`:``}
+          <div class="exp-company"><strong>${e.company}</strong> · ${e.location}</div>
+          ${e.note?`<div style="font-family:var(--fm);font-size:.63rem;color:var(--red);opacity:.75;margin-top:.25rem">${e.note}</div>`:``}
+        </div>
+        <div class="exp-date">${e.date}</div>
+      </div>
+      <ul class="exp-bullets">${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
+      <div class="exp-tags">${e.tags.map(t=>`<span class="exp-tag">${t}</span>`).join('')}</div>
+    </div>`;
+  });
+
+  // Internships
+  const intEl=document.getElementById('panel-internships');
+  document.getElementById('int-count').textContent=C.internships.length;
+  C.internships.forEach((e,i)=>{
+    intEl.innerHTML+=`<div class="exp-card intern rv${i?' d1':''}">
+      <div class="exp-header">
+        <div><div class="exp-role">${e.role}</div>
+          <div class="exp-company"><strong>${e.company}</strong> · ${e.location}</div>
+        </div>
+        <div class="exp-date">${e.date}</div>
+      </div>
+      <ul class="exp-bullets">${e.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
+      <div class="exp-tags">${e.tags.map(t=>`<span class="exp-tag">${t}</span>`).join('')}</div>
+    </div>`;
+  });
+
+  // Education
+  const edg=document.getElementById('edu-grid');
+  C.education.forEach((e,i)=>{edg.innerHTML+=`<div class="edu-card rv${i?' d1':''}">
+    <div class="edu-icon">${e.icon}</div>
+    <div><div class="edu-degree">${e.degree}</div>
+    <div class="edu-school">${e.school}</div>
+    <div class="edu-year">📍 ${e.location} · ${e.year}</div>
+    <span class="edu-badge ${e.level}">${e.level==='masters'?'Post-Graduate':'Under-Graduate'}</span></div>
+  </div>`;});
+
+  // Projects
+  const pgrids=document.getElementById('projects-grid');
+  C.projects.forEach((p,i)=>{pgrids.innerHTML+=`<div class="pc rv${i<5?` d${i+1}`:''}">
+    <div class="pn">${p.num}</div><div class="pt">${p.title}</div>
+    <div class="pd">${p.desc}</div>
+    <div class="pi">${p.impact.map(x=>`<span class="ib">${x}</span>`).join('')}</div>
+    <div class="ptools">${p.tools.map(t=>`<span class="tt">${t}</span>`).join('')}</div>
+    <div class="pconf"><span class="cdot"></span>${p.confidential}</div>
+    <a href="${p.github}" target="_blank" rel="noopener noreferrer" class="pl">View on GitHub →</a>
+  </div>`;});
+
+  // Certs
+  const cg=document.getElementById('certs-grid');
+  document.getElementById('cert-count').textContent=C.certifications.length;
+  C.certifications.forEach(c=>{
+    const pdf=c.pdf?`<a href="${c.pdf}" target="_blank" rel="noopener noreferrer" class="cert-pdf">📄 View PDF</a>`:'';
+    cg.innerHTML+=`<div class="cc rv"><div class="ci ${iconCls[c.icon]||'ge'}">${iconMap[c.icon]||'📋'}</div>
+      <div class="cert-info"><div class="cn">${c.name}</div><div class="ciss">${c.issuer}</div>
+      <div class="cs ${c.status==='Completed'?'done':'prog'}">${c.status==='Completed'?'✓':'⟳'} ${c.status}</div>${pdf}</div></div>`;
+  });
+
+  // Azure
+  const azg=document.getElementById('azure-grid');
+  document.getElementById('az-count').textContent=C.azureAchievements.length;
+  C.azureAchievements.forEach(a=>{
+    const pdf=a.pdf?`<a href="${a.pdf}" target="_blank" rel="noopener noreferrer" class="az-pdf">📄 PDF</a>`:'';
+    azg.innerHTML+=`<div class="az-card rv"><div class="az-left">
+      <div class="az-name">${a.name}</div><div class="az-meta">${a.issuer} · ${a.date}</div>
+      <span class="az-badge">${a.type}</span></div>${pdf}</div>`;
+  });
+
+  // Competitions
+  const compg=document.getElementById('comps-grid');
+  document.getElementById('comp-count').textContent=C.competitions.length;
+  C.competitions.forEach(c=>{
+    const pdf=c.pdf?`<a href="${c.pdf}" target="_blank" rel="noopener noreferrer" class="comp-pdf">📄 PDF</a>`:'';
+    compg.innerHTML+=`<div class="comp-card rv"><div class="comp-left">
+      <div class="comp-name">${c.name}</div><div class="comp-meta">${c.organizer} · ${c.date}</div>
+      <span class="comp-result">${c.result}</span></div>${pdf}</div>`;
+  });
+
+  // Articles
+  const ag=document.getElementById('art-grid');
+  C.articles.forEach((a,i)=>{ag.innerHTML+=`<div class="art-card rv${i<3?` d${i+1}`:''}">
+    <div class="art-top"></div>
+    <div class="art-body">
+      <div class="art-num">${a.num}</div>
+      <div class="art-title">${a.title}</div>
+      <div class="art-summary">${a.summary}</div>
+      <div class="art-tags">${a.tags.map(t=>`<span class="art-tag">${t}</span>`).join('')}</div>
+      <a href="${a.link}" target="_blank" rel="noopener noreferrer" class="art-btn">in View on LinkedIn →</a>
+    </div></div>`;});
+
+  // Recommendations
+  const rg=document.getElementById('rec-grid');
+  C.recommendations.forEach((r,i)=>{
+    const ini=r.name.split(' ').map(w=>w[0]).join('').slice(0,2);
+    rg.innerHTML+=`<div class="rec-card rv${i<3?` d${i+1}`:''}">
+      <div class="rec-top"><div class="rec-avatar" style="background:${r.color}">${ini}</div>
+      <div><div class="rec-name">${r.name}</div><div class="rec-title">${r.title}</div>
+      <div class="rec-company">${r.company}</div></div></div>
+      <div class="rec-quote">"${r.quote}"</div>
+      <div class="rec-badge">in LinkedIn Recommendation</div></div>`;
+  });
+
+  // Skills
+  const sw=document.getElementById('skills-wrap');
+  C.skills.forEach((sg2,gi)=>{
+    let h=`<div class="skill-group rv${gi?` d${gi}`:''}"><div class="skill-group-title">${sg2.group}</div>`;
+    sg2.items.forEach(s=>{h+=`<div class="skill-item skg">
+      <div class="skill-header"><span class="skill-name">${s.name}</span><span class="skill-pct">${s.pct}%</span></div>
+      <div class="skill-bar"><div class="skill-fill" data-w="${s.pct}"></div></div></div>`;});
+    h+='</div>';sw.innerHTML+=h;
+  });
+  sw.innerHTML+=`<div class="rv d2" style="grid-column:1/-1;margin-top:.5rem">
+    <div class="skill-group-title" style="margin-bottom:.9rem">Full Tech Stack</div>
+    <div class="tech-pills">${C.techPills.map(t=>`<span class="tp ${t.cls}">${t.label}</span>`).join('')}</div></div>`;
+
+  // Game stories
+  const gsw=document.getElementById('game-story-wrap');
+  C.gameStories.forEach(s=>{gsw.innerHTML+=`<div class="game-story-block">
+    <div class="gs-label">${s.label}</div>
+    <div class="gs-title">${s.title}</div>
+    <div class="gs-body">${s.body}</div></div>`;});
+
+  // Games
+  const gg=document.getElementById('games-grid');
+  C.games.forEach((g,i)=>{
+    const isLive=g.status==='LIVE';
+    const sb=isLive?`<span class="gpb live">● LIVE</span>`:`<span class="gpb dev">⟳ IN DEVELOPMENT</span>`;
+    const plats=g.platforms.map(p=>`<span class="gpb ${p==='iOS'?'ios':'droid'}">${p}</span>`).join('');
+    const lb=g.link?`<a href="${g.link}" target="_blank" rel="noopener noreferrer" class="glink${isLive?'':' proto'}">${g.linkText}</a>`:`<span class="glink proto">${g.linkText}</span>`;
+    gg.innerHTML+=`<div class="gc rv${i?' d2':''}">
+      <div class="gch"><div class="gpr">${sb}${plats}</div><div class="gtitle">${g.title}</div><div class="gsub">${g.subtitle}</div></div>
+      <div class="gcb"><p class="gdesc">${g.desc}</p>
+      <ul class="gbl">${g.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
+      <div class="gtools">${g.tools.map(t=>`<span class="gto">${t}</span>`).join('')}</div>${lb}</div></div>`;
+  });
+
+  // Activities
+  const actg=document.getElementById('act-grid');
+  [{cat:'🏆 Sports & Achievements',items:C.activities.sports},
+   {cat:'🎯 Leadership & Events',items:C.activities.leadership},
+   {cat:'🤝 Social Contributions',items:C.activities.social}
+  ].forEach((sec,i)=>{actg.innerHTML+=`<div class="act-card rv${i?` d${i}`:''}">
+    <div class="act-cat">${sec.cat}</div>
+    <div class="act-items">${sec.items.map(it=>`
+      <div class="act-item"><div class="act-icon">${it.icon}</div>
+      <div class="act-text"><strong>${it.title}</strong>${it.desc}<div class="act-year">${it.year}</div></div></div>`).join('')}
+    </div></div>`;});
+
+  // Fun card
+  const fc=C.funActivity;
+  document.getElementById('fun-card').innerHTML=`<div class="fun-emoji">${fc.emoji}</div>
+    <div class="fun-content"><div class="fun-title">${fc.title}</div>
+    <div class="fun-desc">${fc.desc}</div>
+    <div class="fun-tags">${fc.tags.map(t=>`<span class="fun-tag">${t}</span>`).join('')}</div></div>`;
+
+  // Contact
+  document.getElementById('contact-links').innerHTML=`
+    <a href="mailto:${C.email}" class="clink rv"><div class="cli">✉</div>${C.email}</a>
+    <a href="${C.linkedin}" target="_blank" rel="noopener noreferrer" class="clink rv d1"><div class="cli">in</div>${C.linkedin.replace('https://','')}</a>
+    <a href="${C.github}" target="_blank" rel="noopener noreferrer" class="clink rv d2"><div class="cli">⌥</div>${C.github.replace('https://','')}</a>
+    <a href="tel:${C.phone.replace(/\D/g,'')}" class="clink rv d3"><div class="cli">📞</div>${C.phone}</a>
+    <a href="${C.playstore}" target="_blank" rel="noopener noreferrer" class="clink rv d4"><div class="cli">🎮</div>Sudoku Chronicles — Google Play Store</a>`;
+
+  // Footer
+  document.getElementById('footer-links').innerHTML=`
+    <a href="${C.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="${C.github}" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="${C.playstore}" target="_blank" rel="noopener noreferrer">Play Store</a>
+    <a href="mailto:${C.email}">Email</a>`;
+
+  // Observers
+  document.querySelectorAll('.rv,.rvl,.rvr').forEach(el=>revealObs.observe(el));
+  document.querySelectorAll('.stat-num').forEach(el=>counterObs.observe(el));
+  document.querySelectorAll('.skg').forEach(el=>barObs.observe(el));
+});
+
+// ── HERO CANVAS ───────────────────────────────────────────────
+const canvas=document.getElementById('hero-canvas'),ctx=canvas.getContext('2d');
+let W,H,P=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+resize();window.addEventListener('resize',()=>{resize();init()});
+class Pt{constructor(){this.reset()}reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.vx=(Math.random()-.5)*.28;this.vy=(Math.random()-.5)*.28;this.sz=Math.random()*1.5+.5;this.a=Math.random()*.42+.1;this.life=Math.random()*220+80;this.ml=this.life}update(){this.x+=this.vx;this.y+=this.vy;this.life--;if(this.life<0)this.reset()}draw(){const a=this.a*(this.life/this.ml);ctx.beginPath();ctx.arc(this.x,this.y,this.sz,0,Math.PI*2);ctx.fillStyle=`rgba(0,229,212,${a})`;ctx.fill()}}
+function init(){P=[];for(let i=0;i<130;i++)P.push(new Pt())}init();
+let mx=W/2,my=H/2;window.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+function drawHero(){ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='rgba(0,229,212,0.025)';
+  for(let x=0;x<W;x+=55)for(let y=0;y<H;y+=55){ctx.beginPath();ctx.arc(x,y,1,0,Math.PI*2);ctx.fill()}
+  for(let i=0;i<P.length;i++){
+    for(let j=i+1;j<P.length;j++){const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<110){ctx.beginPath();ctx.moveTo(P[i].x,P[i].y);ctx.lineTo(P[j].x,P[j].y);ctx.strokeStyle=`rgba(0,229,212,${.07*(1-d/110)})`;ctx.lineWidth=.5;ctx.stroke()}}
+    const dx=P[i].x-mx,dy=P[i].y-my,d=Math.sqrt(dx*dx+dy*dy);if(d<160){ctx.beginPath();ctx.moveTo(P[i].x,P[i].y);ctx.lineTo(mx,my);ctx.strokeStyle=`rgba(0,229,212,${.13*(1-d/160)})`;ctx.lineWidth=.5;ctx.stroke()}
+    P[i].update();P[i].draw()}requestAnimationFrame(drawHero)}drawHero();
+
+// ── GAME CANVAS ───────────────────────────────────────────────
+(function(){const gc=document.getElementById('game-canvas');if(!gc)return;
+  const gx=gc.getContext('2d');let GW,GH;
+  function gr(){const s=document.getElementById('gamedev');GW=gc.width=s.offsetWidth;GH=gc.height=s.offsetHeight}
+  gr();window.addEventListener('resize',gr);
+  const shapes=[],glyphs=['◆','▲','●','■','★','⬡','⬟','◈','⊕','⊞'];
+  const cols=['rgba(139,92,246,','rgba(0,229,212,','rgba(245,166,35,','rgba(34,197,94,'];
+  for(let i=0;i<55;i++)shapes.push({x:Math.random()*1200,y:Math.random()*900,vx:(Math.random()-.5)*.32,vy:(Math.random()-.5)*.32,g:glyphs[~~(Math.random()*glyphs.length)],col:cols[~~(Math.random()*cols.length)],sz:Math.random()*14+7,a:Math.random()*.17+.04,rot:Math.random()*Math.PI*2,vr:(Math.random()-.5)*.011,pulse:Math.random()*Math.PI*2,ps:Math.random()*.03+.01});
+  const orbs=[];for(let i=0;i<6;i++)orbs.push({x:Math.random()*1200,y:Math.random()*900,r:Math.random()*120+60,col:cols[~~(Math.random()*cols.length)],a:Math.random()*.055+.02,vx:(Math.random()-.5)*.16,vy:(Math.random()-.5)*.16,pulse:Math.random()*Math.PI*2,ps:.008});
+  let off=0;
+  function gl(){gx.clearRect(0,0,GW,GH);off=(off+.28)%60;
+    gx.strokeStyle='rgba(139,92,246,0.038)';gx.lineWidth=.5;
+    for(let x=-60+off%60;x<GW+60;x+=60){gx.beginPath();gx.moveTo(x,0);gx.lineTo(x,GH);gx.stroke()}
+    for(let y=0;y<GH;y+=60){gx.beginPath();gx.moveTo(0,y);gx.lineTo(GW,y);gx.stroke()}
+    orbs.forEach(o=>{o.x+=o.vx;o.y+=o.vy;o.pulse+=o.ps;if(o.x<-o.r)o.x=GW+o.r;if(o.x>GW+o.r)o.x=-o.r;if(o.y<-o.r)o.y=GH+o.r;if(o.y>GH+o.r)o.y=-o.r;const pa=o.a*(0.7+Math.sin(o.pulse)*0.3);const grad=gx.createRadialGradient(o.x,o.y,0,o.x,o.y,o.r);grad.addColorStop(0,o.col+pa+')');grad.addColorStop(1,o.col+'0)');gx.beginPath();gx.arc(o.x,o.y,o.r,0,Math.PI*2);gx.fillStyle=grad;gx.fill()});
+    shapes.forEach(s=>{s.x+=s.vx;s.y+=s.vy;s.rot+=s.vr;s.pulse+=s.ps;if(s.x<-40)s.x=GW+40;if(s.x>GW+40)s.x=-40;if(s.y<-40)s.y=GH+40;if(s.y>GH+40)s.y=-40;const pa=s.a*(0.6+Math.sin(s.pulse)*0.4);gx.save();gx.translate(s.x,s.y);gx.rotate(s.rot);gx.font=`${s.sz}px monospace`;gx.fillStyle=s.col+pa+')';gx.textAlign='center';gx.textBaseline='middle';gx.fillText(s.g,0,0);gx.restore()});
+    requestAnimationFrame(gl)}gl();})();
+
+// ── NAV ───────────────────────────────────────────────────────
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50));
+
+// ── TYPEWRITER ────────────────────────────────────────────────
+const titles=['Data Analyst','BI Engineer','ETL Architect','AI Automation Expert','Power BI Developer','Game Developer'];
+let ti=0,ci=0,del=false;
+const tel=document.getElementById('typed');
+function type(){const curr=titles[ti];if(!del){tel.textContent=curr.slice(0,ci+1);ci++;if(ci===curr.length){del=true;setTimeout(type,2200);return}}else{tel.textContent=curr.slice(0,ci-1);ci--;if(ci===0){del=false;ti=(ti+1)%titles.length}}setTimeout(type,del?55:95)}type();
+
+// ── OBSERVERS ─────────────────────────────────────────────────
+const revealObs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.07});
+const counterObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting&&!x.target.dataset.counted){x.target.dataset.counted=true;const t=+x.target.dataset.t,s=x.target.dataset.s||'';let c=0;const iv=setInterval(()=>{c=Math.min(c+t/60,t);x.target.textContent=Math.ceil(c)+s;if(c>=t)clearInterval(iv)},20)}})},{threshold:.5});
+const barObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.querySelectorAll('.skill-fill').forEach(b=>b.style.width=b.dataset.w+'%')})},{threshold:.3});
+
+// ── TILT ──────────────────────────────────────────────────────
+document.querySelectorAll('.pc,.gc').forEach(card=>{
+  card.addEventListener('mousemove',ev=>{const r=card.getBoundingClientRect(),rx=(ev.clientY-r.top-r.height/2)/24,ry=-(ev.clientX-r.left-r.width/2)/24;card.style.transform=`translateY(-4px) rotateX(${rx}deg) rotateY(${ry}deg)`;});
+  card.addEventListener('mouseleave',()=>card.style.transform='');
+});
+</script>
+
+
+
+<!-- ── CHATBOT ───────────────────────────────────────────────── -->
+<style>
+#cb-btn{position:fixed;bottom:2rem;right:2rem;z-index:9999;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#00E5D4,#8B5CF6);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,229,212,.35);transition:transform .2s,box-shadow .2s;font-size:1.4rem}
+#cb-btn:hover{transform:scale(1.1);box-shadow:0 6px 32px rgba(0,229,212,.5)}
+#cb-btn .cb-pulse{position:absolute;width:100%;height:100%;border-radius:50%;background:rgba(0,229,212,.25);animation:cbp 2.2s infinite;pointer-events:none}
+@keyframes cbp{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.35);opacity:0}}
+#cb-badge{position:absolute;top:-3px;right:-3px;width:18px;height:18px;background:#F5A623;border-radius:50%;font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;color:#060B18;display:flex;align-items:center;justify-content:center;border:2px solid #060B18}
+#cb-win{position:fixed;bottom:6rem;right:2rem;z-index:9999;width:370px;height:540px;background:#0C1428;border:1px solid rgba(0,229,212,.2);border-radius:16px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.6);transform:scale(.95) translateY(10px);opacity:0;pointer-events:none;transition:all .25s cubic-bezier(.4,0,.2,1)}
+#cb-win.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+#cb-head{padding:1rem 1.1rem;background:linear-gradient(135deg,rgba(0,229,212,.1),rgba(139,92,246,.08));border-bottom:1px solid rgba(0,229,212,.12);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.cb-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#00E5D4,#8B5CF6);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;color:#060B18;flex-shrink:0}
+.cb-inf{margin-left:.7rem;flex:1}
+.cb-nm{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;color:#EEF2FF;line-height:1}
+.cb-st{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#00E5D4;margin-top:.2rem;display:flex;align-items:center;gap:.35rem}
+.cb-dot{width:6px;height:6px;background:#22C55E;border-radius:50%;animation:cbp2 2s infinite}
+@keyframes cbp2{0%,100%{opacity:1}50%{opacity:.4}}
+#cb-cls{background:transparent;border:none;color:rgba(148,163,196,.6);cursor:pointer;font-size:1.1rem;padding:.25rem;line-height:1;transition:color .2s}
+#cb-cls:hover{color:#EEF2FF}
+#cb-msgs{flex:1;overflow-y:auto;padding:.85rem;display:flex;flex-direction:column;gap:.65rem;scroll-behavior:smooth}
+#cb-msgs::-webkit-scrollbar{width:3px}
+#cb-msgs::-webkit-scrollbar-thumb{background:rgba(0,229,212,.2);border-radius:2px}
+.cbm{max-width:90%;animation:cbf .22s ease}
+@keyframes cbf{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.cbm.bot{align-self:flex-start}.cbm.usr{align-self:flex-end}
+.cbb{padding:.6rem .85rem;border-radius:12px;font-family:'Outfit',sans-serif;font-size:.8rem;line-height:1.65;word-break:break-word}
+.cbm.bot .cbb{background:rgba(0,229,212,.07);border:1px solid rgba(0,229,212,.15);color:#EEF2FF;border-radius:4px 12px 12px 12px}
+.cbm.usr .cbb{background:linear-gradient(135deg,rgba(0,229,212,.18),rgba(139,92,246,.14));border:1px solid rgba(0,229,212,.25);color:#EEF2FF;border-radius:12px 4px 12px 12px}
+.cbb strong{color:#00E5D4;font-weight:600}
+.cbb a{color:#00E5D4;text-decoration:none;border-bottom:1px solid rgba(0,229,212,.35)}
+.cb-typ{display:flex;align-items:center;gap:.3rem;padding:.5rem .85rem}
+.cb-typ span{width:6px;height:6px;background:#00E5D4;border-radius:50%;animation:cbt 1.2s infinite}
+.cb-typ span:nth-child(2){animation-delay:.2s}.cb-typ span:nth-child(3){animation-delay:.4s}
+@keyframes cbt{0%,80%,100%{transform:scale(.8);opacity:.4}40%{transform:scale(1.1);opacity:1}}
+#cb-chips{padding:.5rem .85rem;display:flex;flex-wrap:wrap;gap:.4rem;border-top:1px solid rgba(255,255,255,.05);flex-shrink:0}
+.cb-chip{background:rgba(0,229,212,.06);border:1px solid rgba(0,229,212,.18);color:#EEF2FF;font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.22rem .65rem;border-radius:100px;cursor:pointer;transition:all .18s;white-space:nowrap}
+.cb-chip:hover{background:rgba(0,229,212,.14);color:#00E5D4;border-color:rgba(0,229,212,.4)}
+#cb-form{padding:.7rem .85rem;border-top:1px solid rgba(255,255,255,.05);display:flex;gap:.5rem;flex-shrink:0}
+#cb-inp{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.5rem .75rem;color:#EEF2FF;font-family:'Outfit',sans-serif;font-size:.8rem;outline:none;transition:border-color .2s}
+#cb-inp:focus{border-color:rgba(0,229,212,.4)}
+#cb-inp::placeholder{color:rgba(148,163,196,.5)}
+#cb-snd{background:linear-gradient(135deg,#00E5D4,#8B5CF6);border:none;border-radius:8px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#060B18;font-size:.85rem;transition:opacity .2s;flex-shrink:0}
+#cb-snd:hover{opacity:.85}
+#cb-snd:disabled{opacity:.4;cursor:not-allowed}
+@media(max-width:480px){#cb-win{width:calc(100vw - 2rem);right:1rem;bottom:5rem}}
+</style>
+
+<button id="cb-btn" onclick="cbToggle()" aria-label="Chat with Ankit's AI assistant">
+  <div class="cb-pulse"></div><span>💬</span>
+  <div id="cb-badge">1</div>
+</button>
+
+<div id="cb-win" role="dialog">
+  <div id="cb-head">
+    <div class="cb-av">AB</div>
+    <div class="cb-inf">
+      <div class="cb-nm">Ankit's Portfolio Assistant</div>
+      <div class="cb-st"><span class="cb-dot"></span>Powered by Claude AI</div>
+    </div>
+    <button id="cb-cls" onclick="cbToggle()">✕</button>
+  </div>
+  <div id="cb-msgs">
+    <div class="cbm bot"><div class="cbb">Hi! I am Ankit's portfolio assistant. Ask me anything about his experience, skills, projects, availability, or how to contact him.</div></div>
+  </div>
+  <div id="cb-chips">
+    <span class="cb-chip" onclick="cbAsk('What are Ankit\'s top skills?')">Top skills</span>
+    <span class="cb-chip" onclick="cbAsk('When is Ankit available to start?')">Availability</span>
+    <span class="cb-chip" onclick="cbAsk('Contact details are')">Contact</span>
+    <span class="cb-chip" onclick="cbAsk('What is his current visa status?')">Current Visa Status</span>
+    <span class="cb-chip" onclick="cbAsk('Tell me about his work experience')">Work Experience</span>
+    <span class="cb-chip" onclick="cbAsk('What data projects has he built?')">Projects</span>
+    <span class="cb-chip" onclick="cbAsk('List all his certifications')">Certifications</span>
+  </div>
+  <form id="cb-form" onsubmit="cbSubmit(event)">
+    <input id="cb-inp" type="text" placeholder="Ask about experience, skills, projects..." autocomplete="off" maxlength="300"/>
+    <button id="cb-snd" type="submit">➤</button>
+  </form>
 </div>
-<a href="https://ankitbharti-portfolio.vercel.app">Click here if not redirected</a>
+
+<script>
+const CBS=`You are a professional portfolio assistant for Ankit Bharti, a Data Analyst and BI Engineer. Answer questions from recruiters, hiring managers, and visitors. Be concise, professional, and honest. Use natural human language. No corporate buzzwords.
+
+CONTACT:
+Email: abharti1040@gmail.com | Phone: (917) 609-2096 | LinkedIn: https://www.linkedin.com/in/ankitbharti2834/ | GitHub: https://github.com/Ankitbharti2834 | Portfolio: https://ankitbharti-portfolio.vercel.app
+
+LOCATION & AVAILABILITY:
+Decatur, GA. Open to relocate anywhere in USA. On-site, Remote, or Hybrid.
+Visa: H-1B — requires H-1B transfer to new employer. Transfer takes roughly 2 to 4 weeks. Can start as soon as transfer completes.
+Salary: Targeting $80,000 to $100,000 depending on role and location.
+
+SUMMARY:
+Data Analyst with 3+ years building data pipelines, BI solutions, and automation systems. Skilled in SQL, Python, Power BI, DAX, and Azure Data Factory.
+
+WORK EXPERIENCE:
+1. Data Analyst (grew to Executive Data Analyst then Management Analyst) — Aware Custom Biometric Wearables, Atlanta, GA (Nov 2023 – Nov 2025)
+Worked directly under CFO, COO, CEO, Directors, and President. Trained junior team members.
+Built Power BI reports and semantic models with DAX and Power Query — boosting forecast accuracy by 30%.
+Applied data modeling across Dynamics 365, Dataverse, and Azure Synapse — raising accessibility by 30%.
+Implemented Microsoft Copilot and GPT workflows for report automation — cutting manual effort by 45%.
+Automated ETL pipelines with Azure Data Factory and Power Automate — reducing cycle time by 40%.
+Managed Shopify order statuses (Received, In Development, Shipped) and built automated customer emails via Power Automate.
+Products: EarShield, SleepPlug, EarDefender, CEP, EarBud Molds, Echolock, music plugs, Swimplugs, RadioComm, Overmolds — all custom-built from 3D ear scans.
+Role ended due to restructuring — not performance. CFO wrote a formal recommendation letter confirming this.
+
+2. Database Coordinator — University of North Alabama, Florence, AL (Apr 2022 – May 2023)
+Power BI and Excel only. Improved enrollment forecasting accuracy by 25%, data completeness by 35%, reporting turnaround time by 20%. Established data governance standards with 100% compliance.
+
+3. Data Management Analyst — Fluegel India Pvt. Ltd., Lucknow, India (Sep 2019 – Jun 2021)
+Role ended due to COVID-19 restructuring.
+
+INTERNSHIPS:
+Tech Operator Intern — Red Clay Consulting, Alpharetta, GA (Sep 2023 – Oct 2023)
+Financial Analyst Intern — KPMG x Forage, Virtual (Nov 2021 – Dec 2021)
+Python Programming Intern — EI-Systems Technologies, Varanasi, India (Jul 2021 – Oct 2021)
+Data Analytics Virtual Experience — Forage, Virtual (May 2021 – Jun 2021)
+
+EDUCATION:
+MBA in Information Systems — University of North Alabama, GPA 3.67, May 2023
+Bachelor's in Commerce (Hons.) — University of Lucknow, India, Jul 2019
+
+SKILLS:
+Power BI, DAX, Power Query, Semantic Models, RLS, Azure Synapse, Azure Data Factory, Azure Data Lake, ADLS Gen2, MS Fabric, SQL (SQL Server, PostgreSQL), Python (Pandas, NumPy), ETL, SSIS, Power Automate, Microsoft Copilot, GPT Automation, Logic Apps, Dynamics 365, Shopify API, Dataverse, BigQuery, Tableau, Advanced Excel, VBA, Agile, Data Governance, GDPR, HIPAA
+
+CERTIFICATIONS (23+):
+IBM Data Analyst, PL-300 Power BI (in progress), Apache Spark SQL, Prompt Engineering for Generative AI, AI in Business Strategy, AI for Everyone, Agile Analytics, Advanced SQL, Financial Modeling, and more.
+
+DATA PROJECTS (7):
+1. Enterprise Power BI KPI Dashboard Suite — Azure Synapse, Dynamics 365, SharePoint. 30% faster reporting.
+2. End-to-End ETL Pipeline and Azure Data Warehouse — Medallion architecture, ADF. 65% faster data loads.
+3. GPT-Powered Automation and AI Agent Workflows — GPT-4o, Power Automate. 45% less manual effort.
+4. Financial Forecasting Model — Python OLS, VBA. 25% forecast accuracy improvement.
+5. E-Commerce Analytics — 3 Shopify storefronts unified into Power BI. 50% less reconciliation.
+6. Data Quality Framework and GDPR/HIPAA Compliance Dashboard. 100% audit-ready.
+7. Institutional Data Audit — University of North Alabama. 50% data accuracy improvement.
+
+GAME DEVELOPMENT:
+Sudoku Chronicles — LIVE on Google Play Store. Python and Kivy. 30+ chapters with ancient civilization themes. Built for his nephew.
+Cricket League — 3D simulation IN DEVELOPMENT. Unity, Blender 4.4, Mixamo. 240+ rigged characters. Offline tournaments, custom team editing. Next milestone: online multiplayer.
+
+CO-CURRICULAR:
+District Cricket Council — Winner (2015). Soccer Club Member — UNA (2022–2023). Treasurer, Residence Hall Association — UNA (2022–2023). Director of International Student Events — UNA (2022). Volunteer: Muscle Shoals National Heritage (2022). Volunteer: Old School construction, Alabama (2022).
+
+ANSWER RULES:
+Keep answers to 3 to 5 sentences unless more detail is genuinely needed.
+Never make up information not listed here.
+For contact requests or "Contact details are": reply with Email, Phone, and LinkedIn only. Do not include GitHub unless specifically asked.
+Never use: leveraging, passionate about, driving outcomes, results-oriented, or any AI-sounding phrases.
+Be direct and friendly like a knowledgeable colleague speaking on Ankit's behalf.`;
+
+let cbOpen=false,cbHist=[],cbBusy=false;
+
+function cbToggle(){
+  cbOpen=!cbOpen;
+  document.getElementById('cb-win').classList.toggle('open',cbOpen);
+  document.getElementById('cb-badge').style.display=cbOpen?'none':'flex';
+  if(cbOpen)setTimeout(()=>document.getElementById('cb-inp').focus(),300);
+}
+
+function cbAsk(q){document.getElementById('cb-inp').value=q;cbSubmit(new Event('submit'));}
+
+function cbSubmit(e){
+  e.preventDefault();
+  const inp=document.getElementById('cb-inp');
+  const q=inp.value.trim();
+  if(!q||cbBusy)return;
+  inp.value='';
+  cbAdd(q,'usr');
+  cbHist.push({role:'user',content:q});
+  cbFetch();
+}
+
+function cbAdd(text,role){
+  const w=document.getElementById('cb-msgs');
+  const d=document.createElement('div');
+  d.className='cbm '+role;
+  const b=document.createElement('div');
+  b.className='cbb';
+  b.innerHTML=text;
+  d.appendChild(b);
+  w.appendChild(d);
+  w.scrollTop=w.scrollHeight;
+}
+
+function cbShowTyping(){
+  const w=document.getElementById('cb-msgs');
+  const d=document.createElement('div');
+  d.className='cbm bot';d.id='cb-typ-ind';
+  d.innerHTML='<div class="cb-typ"><span></span><span></span><span></span></div>';
+  w.appendChild(d);w.scrollTop=w.scrollHeight;
+}
+
+function cbHideTyping(){const t=document.getElementById('cb-typ-ind');if(t)t.remove();}
+
+async function cbFetch(){
+  cbBusy=true;
+  document.getElementById('cb-snd').disabled=true;
+  cbShowTyping();
+  try{
+    const r=await fetch('/api/chat',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({system:CBS,messages:cbHist.slice(-12)})
+    });
+    const d=await r.json();
+    cbHideTyping();
+    if(d.content&&d.content[0]&&d.content[0].text){
+      const txt=d.content[0].text;
+      cbHist.push({role:'assistant',content:txt});
+      const fmt=txt.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+      cbAdd(fmt,'bot');
+    } else {
+      cbAdd("Sorry, I could not get a response. Contact Ankit at <a href='mailto:abharti1040@gmail.com'>abharti1040@gmail.com</a>",'bot');
+    }
+  } catch(err){
+    cbHideTyping();
+    cbAdd("Connection issue. Please try again or contact Ankit at <a href='mailto:abharti1040@gmail.com'>abharti1040@gmail.com</a> or call <a href='tel:9176092096'>(917) 609-2096</a>",'bot');
+  }
+  cbBusy=false;
+  document.getElementById('cb-snd').disabled=false;
+}
+
+document.getElementById('cb-inp').addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();cbSubmit(e);}
+});
+</script>
 </body>
 </html>
