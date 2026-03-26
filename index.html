@@ -1224,5 +1224,230 @@ document.querySelectorAll('.pc,.gc').forEach(card=>{
 </script>
 
 
+
+<!-- ── CHATBOT ───────────────────────────────────────────────── -->
+<style>
+#cb-btn{position:fixed;bottom:2rem;right:2rem;z-index:9999;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#00E5D4,#8B5CF6);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,229,212,.35);transition:transform .2s,box-shadow .2s;font-size:1.4rem}
+#cb-btn:hover{transform:scale(1.1);box-shadow:0 6px 32px rgba(0,229,212,.5)}
+#cb-btn .cb-pulse{position:absolute;width:100%;height:100%;border-radius:50%;background:rgba(0,229,212,.25);animation:cbp 2.2s infinite;pointer-events:none}
+@keyframes cbp{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.35);opacity:0}}
+#cb-badge{position:absolute;top:-3px;right:-3px;width:18px;height:18px;background:#F5A623;border-radius:50%;font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:600;color:#060B18;display:flex;align-items:center;justify-content:center;border:2px solid #060B18}
+#cb-win{position:fixed;bottom:6rem;right:2rem;z-index:9999;width:370px;height:540px;background:#0C1428;border:1px solid rgba(0,229,212,.2);border-radius:16px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.6);transform:scale(.95) translateY(10px);opacity:0;pointer-events:none;transition:all .25s cubic-bezier(.4,0,.2,1)}
+#cb-win.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all}
+#cb-head{padding:1rem 1.1rem;background:linear-gradient(135deg,rgba(0,229,212,.1),rgba(139,92,246,.08));border-bottom:1px solid rgba(0,229,212,.12);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.cb-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#00E5D4,#8B5CF6);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:.85rem;font-weight:800;color:#060B18;flex-shrink:0}
+.cb-inf{margin-left:.7rem;flex:1}
+.cb-nm{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;color:#EEF2FF;line-height:1}
+.cb-st{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:#00E5D4;margin-top:.2rem;display:flex;align-items:center;gap:.35rem}
+.cb-dot{width:6px;height:6px;background:#22C55E;border-radius:50%;animation:cbp2 2s infinite}
+@keyframes cbp2{0%,100%{opacity:1}50%{opacity:.4}}
+#cb-cls{background:transparent;border:none;color:rgba(148,163,196,.6);cursor:pointer;font-size:1.1rem;padding:.25rem;line-height:1;transition:color .2s}
+#cb-cls:hover{color:#EEF2FF}
+#cb-msgs{flex:1;overflow-y:auto;padding:.85rem;display:flex;flex-direction:column;gap:.65rem;scroll-behavior:smooth}
+#cb-msgs::-webkit-scrollbar{width:3px}
+#cb-msgs::-webkit-scrollbar-thumb{background:rgba(0,229,212,.2);border-radius:2px}
+.cbm{max-width:90%;animation:cbf .22s ease}
+@keyframes cbf{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.cbm.bot{align-self:flex-start}.cbm.usr{align-self:flex-end}
+.cbb{padding:.6rem .85rem;border-radius:12px;font-family:'Outfit',sans-serif;font-size:.8rem;line-height:1.65;word-break:break-word}
+.cbm.bot .cbb{background:rgba(0,229,212,.07);border:1px solid rgba(0,229,212,.15);color:#EEF2FF;border-radius:4px 12px 12px 12px}
+.cbm.usr .cbb{background:linear-gradient(135deg,rgba(0,229,212,.18),rgba(139,92,246,.14));border:1px solid rgba(0,229,212,.25);color:#EEF2FF;border-radius:12px 4px 12px 12px}
+.cbb strong{color:#00E5D4;font-weight:600}
+.cbb a{color:#00E5D4;text-decoration:none;border-bottom:1px solid rgba(0,229,212,.35)}
+.cb-typ{display:flex;align-items:center;gap:.3rem;padding:.5rem .85rem}
+.cb-typ span{width:6px;height:6px;background:#00E5D4;border-radius:50%;animation:cbt 1.2s infinite}
+.cb-typ span:nth-child(2){animation-delay:.2s}.cb-typ span:nth-child(3){animation-delay:.4s}
+@keyframes cbt{0%,80%,100%{transform:scale(.8);opacity:.4}40%{transform:scale(1.1);opacity:1}}
+#cb-chips{padding:.5rem .85rem;display:flex;flex-wrap:wrap;gap:.4rem;border-top:1px solid rgba(255,255,255,.05);flex-shrink:0}
+.cb-chip{background:rgba(0,229,212,.06);border:1px solid rgba(0,229,212,.18);color:#EEF2FF;font-family:'JetBrains Mono',monospace;font-size:.62rem;padding:.22rem .65rem;border-radius:100px;cursor:pointer;transition:all .18s;white-space:nowrap}
+.cb-chip:hover{background:rgba(0,229,212,.14);color:#00E5D4;border-color:rgba(0,229,212,.4)}
+#cb-form{padding:.7rem .85rem;border-top:1px solid rgba(255,255,255,.05);display:flex;gap:.5rem;flex-shrink:0}
+#cb-inp{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.5rem .75rem;color:#EEF2FF;font-family:'Outfit',sans-serif;font-size:.8rem;outline:none;transition:border-color .2s}
+#cb-inp:focus{border-color:rgba(0,229,212,.4)}
+#cb-inp::placeholder{color:rgba(148,163,196,.5)}
+#cb-snd{background:linear-gradient(135deg,#00E5D4,#8B5CF6);border:none;border-radius:8px;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#060B18;font-size:.85rem;transition:opacity .2s;flex-shrink:0}
+#cb-snd:hover{opacity:.85}
+#cb-snd:disabled{opacity:.4;cursor:not-allowed}
+@media(max-width:480px){#cb-win{width:calc(100vw - 2rem);right:1rem;bottom:5rem}}
+</style>
+
+<button id="cb-btn" onclick="cbToggle()" aria-label="Chat with Ankit's AI assistant">
+  <div class="cb-pulse"></div><span>💬</span>
+  <div id="cb-badge">1</div>
+</button>
+
+<div id="cb-win" role="dialog">
+  <div id="cb-head">
+    <div class="cb-av">AB</div>
+    <div class="cb-inf">
+      <div class="cb-nm">Ankit's Portfolio Assistant</div>
+      <div class="cb-st"><span class="cb-dot"></span>Powered by Claude AI</div>
+    </div>
+    <button id="cb-cls" onclick="cbToggle()">✕</button>
+  </div>
+  <div id="cb-msgs">
+    <div class="cbm bot"><div class="cbb">Hi! I am Ankit's portfolio assistant. Ask me anything about his experience, skills, projects, availability, or how to contact him.</div></div>
+  </div>
+  <div id="cb-chips">
+    <span class="cb-chip" onclick="cbAsk('What are Ankit\'s top skills?')">Top skills</span>
+    <span class="cb-chip" onclick="cbAsk('When is Ankit available to start?')">Availability</span>
+    <span class="cb-chip" onclick="cbAsk('Contact details are')">Contact</span>
+    <span class="cb-chip" onclick="cbAsk('What is his current visa status?')">Current Visa Status</span>
+    <span class="cb-chip" onclick="cbAsk('Tell me about his work experience')">Work Experience</span>
+    <span class="cb-chip" onclick="cbAsk('What data projects has he built?')">Projects</span>
+    <span class="cb-chip" onclick="cbAsk('List all his certifications')">Certifications</span>
+  </div>
+  <form id="cb-form" onsubmit="cbSubmit(event)">
+    <input id="cb-inp" type="text" placeholder="Ask about experience, skills, projects..." autocomplete="off" maxlength="300"/>
+    <button id="cb-snd" type="submit">➤</button>
+  </form>
+</div>
+
+<script>
+const CBS=`You are a professional portfolio assistant for Ankit Bharti, a Data Analyst and BI Engineer. Answer questions from recruiters, hiring managers, and visitors. Be concise, professional, and honest. Use natural human language. No corporate buzzwords.
+
+CONTACT:
+Email: abharti1040@gmail.com | Phone: (917) 609-2096 | LinkedIn: https://www.linkedin.com/in/ankitbharti2834/ | GitHub: https://github.com/Ankitbharti2834
+
+LOCATION & AVAILABILITY:
+Decatur, GA. Open to relocate anywhere in USA. On-site, Remote, or Hybrid.
+Visa: H-1B — requires H-1B transfer to new employer. Transfer takes roughly 2 to 4 weeks. Can start as soon as transfer completes.
+Salary: Targeting $80,000 to $100,000 depending on role and location.
+
+SUMMARY:
+Data Analyst with 3+ years building data pipelines, BI solutions, and automation systems. Skilled in SQL, Python, Power BI, DAX, and Azure Data Factory.
+
+WORK EXPERIENCE:
+1. Data Analyst (grew to Executive Data Analyst then Management Analyst) — Aware Custom Biometric Wearables, Atlanta, GA (Nov 2023 – Nov 2025)
+Worked directly under CFO, COO, CEO, Directors, and President. Trained junior team members.
+Built Power BI reports and semantic models with DAX and Power Query — boosting forecast accuracy by 30%.
+Applied data modeling across Dynamics 365, Dataverse, and Azure Synapse — raising accessibility by 30%.
+Implemented Microsoft Copilot and GPT workflows for report automation — cutting manual effort by 45%.
+Automated ETL pipelines with Azure Data Factory and Power Automate — reducing cycle time by 40%.
+Managed Shopify order statuses (Received, In Development, Shipped) and built automated customer emails via Power Automate.
+Products: EarShield, SleepPlug, EarDefender, CEP, EarBud Molds, Echolock, music plugs, Swimplugs, RadioComm, Overmolds — all custom-built from 3D ear scans.
+Role ended due to restructuring — not performance. CFO wrote a formal recommendation letter confirming this.
+
+2. Database Coordinator — University of North Alabama, Florence, AL (Apr 2022 – May 2023)
+Power BI and Excel only. Improved enrollment forecasting accuracy by 25%, data completeness by 35%, reporting turnaround time by 20%. Established data governance standards with 100% compliance.
+
+3. Data Management Analyst — Fluegel India Pvt. Ltd., Lucknow, India (Sep 2019 – Jun 2021)
+Role ended due to COVID-19 restructuring.
+
+INTERNSHIPS:
+Tech Operator Intern — Red Clay Consulting, Alpharetta, GA (Sep 2023 – Oct 2023)
+Financial Analyst Intern — KPMG x Forage, Virtual (Nov 2021 – Dec 2021)
+Python Programming Intern — EI-Systems Technologies, Varanasi, India (Jul 2021 – Oct 2021)
+Data Analytics Virtual Experience — Forage, Virtual (May 2021 – Jun 2021)
+
+EDUCATION:
+MBA in Information Systems — University of North Alabama, GPA 3.67, May 2023
+Bachelor's in Commerce (Hons.) — University of Lucknow, India, Jul 2019
+
+SKILLS:
+Power BI, DAX, Power Query, Semantic Models, RLS, Azure Synapse, Azure Data Factory, Azure Data Lake, ADLS Gen2, MS Fabric, SQL (SQL Server, PostgreSQL), Python (Pandas, NumPy), ETL, SSIS, Power Automate, Microsoft Copilot, GPT Automation, Logic Apps, Dynamics 365, Shopify API, Dataverse, BigQuery, Tableau, Advanced Excel, VBA, Agile, Data Governance, GDPR, HIPAA
+
+CERTIFICATIONS (23+):
+IBM Data Analyst, PL-300 Power BI (in progress), Apache Spark SQL, Prompt Engineering for Generative AI, AI in Business Strategy, AI for Everyone, Agile Analytics, Advanced SQL, Financial Modeling, and more.
+
+DATA PROJECTS (7):
+1. Enterprise Power BI KPI Dashboard Suite — Azure Synapse, Dynamics 365, SharePoint. 30% faster reporting.
+2. End-to-End ETL Pipeline and Azure Data Warehouse — Medallion architecture, ADF. 65% faster data loads.
+3. GPT-Powered Automation and AI Agent Workflows — GPT-4o, Power Automate. 45% less manual effort.
+4. Financial Forecasting Model — Python OLS, VBA. 25% forecast accuracy improvement.
+5. E-Commerce Analytics — 3 Shopify storefronts unified into Power BI. 50% less reconciliation.
+6. Data Quality Framework and GDPR/HIPAA Compliance Dashboard. 100% audit-ready.
+7. Institutional Data Audit — University of North Alabama. 50% data accuracy improvement.
+
+GAME DEVELOPMENT:
+Sudoku Chronicles — LIVE on Google Play Store. Python and Kivy. 30+ chapters with ancient civilization themes. Built for his nephew.
+Cricket League — 3D simulation IN DEVELOPMENT. Unity, Blender 4.4, Mixamo. 240+ rigged characters. Offline tournaments, custom team editing. Next milestone: online multiplayer.
+
+CO-CURRICULAR:
+District Cricket Council — Winner (2015). Soccer Club Member — UNA (2022–2023). Treasurer, Residence Hall Association — UNA (2022–2023). Director of International Student Events — UNA (2022). Volunteer: Muscle Shoals National Heritage (2022). Volunteer: Old School construction, Alabama (2022).
+
+ANSWER RULES:
+Keep answers to 3 to 5 sentences unless more detail is genuinely needed.
+Never make up information not listed here.
+For contact requests or "Contact details are": reply with Email, Phone, and LinkedIn only. Do not include GitHub unless specifically asked.
+Never use: leveraging, passionate about, driving outcomes, results-oriented, or any AI-sounding phrases.
+Be direct and friendly like a knowledgeable colleague speaking on Ankit's behalf.`;
+
+let cbOpen=false,cbHist=[],cbBusy=false;
+
+function cbToggle(){
+  cbOpen=!cbOpen;
+  document.getElementById('cb-win').classList.toggle('open',cbOpen);
+  document.getElementById('cb-badge').style.display=cbOpen?'none':'flex';
+  if(cbOpen)setTimeout(()=>document.getElementById('cb-inp').focus(),300);
+}
+
+function cbAsk(q){document.getElementById('cb-inp').value=q;cbSubmit(new Event('submit'));}
+
+function cbSubmit(e){
+  e.preventDefault();
+  const inp=document.getElementById('cb-inp');
+  const q=inp.value.trim();
+  if(!q||cbBusy)return;
+  inp.value='';
+  cbAdd(q,'usr');
+  cbHist.push({role:'user',content:q});
+  cbFetch();
+}
+
+function cbAdd(text,role){
+  const w=document.getElementById('cb-msgs');
+  const d=document.createElement('div');
+  d.className='cbm '+role;
+  const b=document.createElement('div');
+  b.className='cbb';
+  b.innerHTML=text;
+  d.appendChild(b);
+  w.appendChild(d);
+  w.scrollTop=w.scrollHeight;
+}
+
+function cbShowTyping(){
+  const w=document.getElementById('cb-msgs');
+  const d=document.createElement('div');
+  d.className='cbm bot';d.id='cb-typ-ind';
+  d.innerHTML='<div class="cb-typ"><span></span><span></span><span></span></div>';
+  w.appendChild(d);w.scrollTop=w.scrollHeight;
+}
+
+function cbHideTyping(){const t=document.getElementById('cb-typ-ind');if(t)t.remove();}
+
+async function cbFetch(){
+  cbBusy=true;
+  document.getElementById('cb-snd').disabled=true;
+  cbShowTyping();
+  try{
+    const r=await fetch('/api/chat',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({system:CBS,messages:cbHist.slice(-12)})
+    });
+    const d=await r.json();
+    cbHideTyping();
+    if(d.content&&d.content[0]&&d.content[0].text){
+      const txt=d.content[0].text;
+      cbHist.push({role:'assistant',content:txt});
+      const fmt=txt.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+      cbAdd(fmt,'bot');
+    } else {
+      cbAdd("Sorry, I could not get a response. Contact Ankit at <a href='mailto:abharti1040@gmail.com'>abharti1040@gmail.com</a>",'bot');
+    }
+  } catch(err){
+    cbHideTyping();
+    cbAdd("Connection issue. Please try again or contact Ankit at <a href='mailto:abharti1040@gmail.com'>abharti1040@gmail.com</a> or call <a href='tel:9176092096'>(917) 609-2096</a>",'bot');
+  }
+  cbBusy=false;
+  document.getElementById('cb-snd').disabled=false;
+}
+
+document.getElementById('cb-inp').addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();cbSubmit(e);}
+});
+</script>
 </body>
 </html>
