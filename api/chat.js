@@ -26,7 +26,7 @@ export default async function handler(req, res) {
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-5',
+        model: 'claude-haiku-4-5-20251001',
         max_tokens: 1000,
         system: system,
         messages: messages
@@ -35,8 +35,11 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    if (data.type === 'error') {
-      return res.status(400).json({ error: data.error?.message || 'Anthropic API error' });
+    if (!response.ok) {
+      return res.status(response.status).json({
+        error: data.error?.message || 'Anthropic API error',
+        type: data.error?.type || 'unknown'
+      });
     }
 
     return res.status(200).json(data);
@@ -45,4 +48,3 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Server error' });
   }
 }
-
