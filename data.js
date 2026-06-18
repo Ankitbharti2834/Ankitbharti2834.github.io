@@ -16,7 +16,7 @@ const CONFIG = {
   location: "Atlanta, GA",
   relocate: "Open to Relocate Anywhere",
   workMode: "On-site / Remote / Hybrid",
-  linkedin: "https://linkedin.com/in/ankitbharti2834",
+  linkedin: "https://linkedin.com/in/a-bharti/",
   github: "https://github.com/Ankitbharti2834",
   playstore: "https://play.google.com/store/apps/details?id=org.sudoku.chronicles1.sudoku&hl=en-US",
 
